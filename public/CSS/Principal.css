@@ -1,0 +1,292 @@
+* {
+margin:0px;
+padding:0px;
+font-family: "Fuente";
+}
+
+@font-face {
+    font-family: "Fuente";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("Fuentes/SourceSansPro-Regular.woff") format("woff"), url("Fuentes/SourceSansPro-Regular.ttf") format("truetype");
+}
+
+body {
+  background: radial-gradient(#FF0126, #A0041C, #72101D);
+    /*background-image: url("../Imagenes/FondoPrincipal.jpg");*/
+    background-size: 100% 100%; 
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+h1{
+  font-family: "Fuente";
+  font-style: normal;
+  float: left;
+  padding-top: 15px;
+  font-size: 30px;
+}
+
+img{
+  width: 80px;
+  background-position: 50%;
+  border-radius: 5%;
+  float: left;
+  padding-right: 20px;
+}
+
+header {
+  background: #FFFFFF;
+  margin-bottom:20px;
+  width: 100%;
+  overflow:hidden;
+  position: fixed;
+  z-index: 100;
+  box-shadow: 2px 2px 5px #585858;
+  background: linear-gradient(#FFFFFF, #E6E6E6);
+}
+
+section {
+  padding-top: 100px;
+  float: center;
+  color: #FFFFFF;
+  display: block;
+}
+
+header .logo {
+  color:#FE2E2E;
+  float:left;
+}
+
+header nav {
+  float:right;
+  padding-top: 15px;
+}
+
+header nav a {
+  display:inline-block;
+  color:red;
+  text-decoration:none;
+  padding:10px 10px;
+  line-height:normal;
+  border-radius:50px;
+  font-size:20px;
+  color: #FE2E2E;
+  -webkit-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+  transition:all 500ms ease;
+}
+
+
+header nav a:hover {
+  background:#FE2E2E;
+  border-radius:50px;
+  color: #FFFFFF;
+}
+
+  
+.wrapper {
+  width: 80%;
+  margin: auto;
+  overflow:hidden;
+  max-width:1000px;
+}
+
+p, ul, li, div, nav { 
+
+  padding:0; 
+  margin:0; 
+  } 
+
+
+  body { 
+    font-family:Calibri;
+   }
+
+    #menu {
+     overflow: auto; 
+     position:relative;
+      z-index:2;
+      } 
+
+.parent-menu {
+  background: rgba(255, 255, 255, 255, 0.5);
+ min-width:200px; 
+ float:left; 
+
+ } 
+
+ #menu ul { 
+  list-style-type:none; 
+  }
+
+   #menu ul li a {
+   padding:10px 15px; 
+   display:block; 
+   color:#fff; 
+   text-decoration:none; 
+   } 
+
+   #menu ul li a:hover 
+   { 
+
+  background: rgba(255, 255, 255, 255, 0.7);
+   /* background-color:transparent;*/
+    
+    
+     }
+
+#menu ul li:hover > ul {
+ left: 200px;
+  -webkit-transition: left 200ms ease-in; 
+  -moz-transition: left 200ms ease-in; 
+  -ms-transition: left 200ms ease-in; 
+  transition: left 200ms ease-in; 
+}
+
+#menu ul li > ul {
+ position: absolute; 
+
+ top: 0; left: -200px; 
+ min-width: 200px; 
+ z-index: -1; 
+ height: 100%; 
+ -webkit-transition: left 200ms ease-in;
+
+-moz-transition: left 200ms ease-in; 
+-ms-transition: left 200ms ease-in; 
+transition: left 200ms ease-in; 
+}
+
+ #menu ul li > ul li a:hover { 
+  background: rgba(255, 255, 255, 255, 0.5);
+}
+
+.cajaPrincipalCenter{
+
+    background-color:#F3E2A9 ;
+    height: 360px;    
+    width: 650px;
+    border :8px solid #F3E2A9;
+    border-radius: 5px;
+    margin : 5px auto;
+    box-shadow: 10px 10px 5px #000000;
+    text-align: center;
+    position: center;
+    
+    }
+
+
+.registrarHorario{
+  position: center;
+  width:1000px;
+  height: 300px;
+  padding:40px 30px;
+  background:rgba(235,235,205,0.7);
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+.registrarHorario h2{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 30px;
+  color: red;
+}
+
+.registrarHorario h5{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 13px;
+  color: red;
+}
+
+
+
+.generarReporte{
+  position: center;
+  width:1000px;
+  height: 550px;
+  padding:40px 30px;
+  background:rgba(235,235,205,0.7);
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+.generarReporte h2{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 30px;
+  color: red;
+}
+
+.generarReporte h5{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 13px;
+  color: red;
+}
+
+
+
+
+
+.generarInforme, .creandoInforme, .MisAsignaturas{
+  position: center;
+  width:1000px;
+  height: 300px;
+  padding:40px 30px;
+  background:rgba(235,235,205,0.7);
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+.generarInforme, .creandoInforme, .MisAsignaturas h2{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 30px;
+  color: red;
+}
+
+.generarInforme, .creandoInforme, .MisAsignaturas h5{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 13px;
+  color: red;
+}
+
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+ 
+input {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+}
+
