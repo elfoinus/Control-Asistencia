@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\BD;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 use config\sesion;
 
@@ -23,6 +25,10 @@ class ProfesorController extends Controller{
 
 	
 	public function calcularHorario(){
+		$idHorario;
+		$asig;$nomAsig;
+		$dia;$hInicio;$cHoras;$idProfesor;
+
 		# esta funcion imprime la tabla de los horarios disponibles para el profesor a la vista profesor
 		$usuario = session()->get('id');
 		# hacer que solo retorne los registros que tengan el dia actual con carbon  http://carbon.nesbot.com/docs/
@@ -51,19 +57,23 @@ class ProfesorController extends Controller{
                      	
 
 	               for($i = 0; $i < sizeof($horario); $i++ ){
+                     $idHorario=$horario[$i]->id_Horario;
+                     $asig=$horario[$i]->id_asignatura_dependencia;
+                     $dia=$horario[$i]->dia;
+                     $hInicio=$horario[$i]->hora_inicial;
+                     $cHoras= $horario[$i]->cantidad_horas;
+                     $idProfesor = $horario[$i]->id_usuario;
 
-		
-	                 //   $nombreAsignatura = id_asignatura_dependencia::where('codigo_asignatura',$horario[$i]->id_asignatura_dependencia)->get();
-                       //.$nombreAsignatura."</h5></td>  
+                     $nomAsig= ProfesorController::nombreAsignatura($asig);
 
 					echo "  
 					    <tr>  
-					      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
-					      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
-					      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
-					      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
-					      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
-					      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
+					      <td width='150'><h5>".$idHorario."</h5></td> 
+					      <td width='150'><h5>".$nomAsig."</h5></td> 
+					      <td width='150'><h5>".$dia."</h5></td> 
+					      <td width='150'><h5>".$hInicio."</h5></td> 
+					      <td width='150'><h5>".$cHoras."</h5></td> 
+					      <td width='150'><h5>".$idProfesor."</h5></td> 
 					      <td width='150'><h5>"."<input type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
 
 					    </tr>   
@@ -76,6 +86,11 @@ class ProfesorController extends Controller{
 
 	public function misAsignaturas(){
 			# esta funcion imprime la tabla de las asignaturas del profesor a la vista profesor
+        $id_asignatura_depen;
+        $dia;
+        $hInicial;
+        $cHoras;
+        $NombreAsig;
 
 		$usuario = session()->get('id');
 
@@ -100,28 +115,40 @@ class ProfesorController extends Controller{
                      	
 
 	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
-   
-					echo "  
+                      $id_asignatura_depen= $asignaturas[$i]->id_asignatura_dependencia;
+                      $dia=$asignaturas[$i]->dia;
+                      $hInicial = $asignaturas[$i]->hora_inicial;
+                      $cHoras=$asignaturas[$i]->cantidad_horas;
+
+                      $NombreAsig = ProfesorController::NombreAsignatura($id_asignatura_depen);
+                      
+					  echo "  
 					    <tr>  
-					      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
-					      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
-					      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
-					      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
-					    </tr>   
-					";  
-						
-	                     	}
+					      <td width='150'><h5>".$NombreAsig."</h5></td>  
+					      <td width='150'><h5>".$dia."</h5></td> 
+					      <td width='150'><h5>".$hInicial."</h5></td> 
+					      <td width='150'><h5>".$cHoras."</h5></td> 
+					    </tr>";  
+	                }
 	}
 
-	public function retornarNombreAsignatura($idAsig_dependencia){
-    $nombreAsignatura;
-    $AsignaturaDep = Asignatura_dependencia::where('id_asignatura_dependencia',$idAsig_dependencia)->get();
-     
-     for ($i=0; $i < sizeof($AsignaturaDep); $i++) { 
-     	
-     	$nombreAsignatura=$AsignaturaDep[$i]->codigo_asignatura;
-     }
+	public function NombreAsignatura($idAsig_dependencia){
+    $nombreAsignatura="--";$codigoAsig="--";
 
+    $codigoAsig = BD::table('asignatura_dependencia')->where('id_asignatura_dependencia','=',$idAsig_dependencia)->value('codigo_asignatura');
+    
+    $nombreAsignatura = BD::table('asignaturas')->where('codigo_asignatura','=',$codigoAsig)->value('nombre_asignatura');
+     
+    return $nombreAsignatura;
+	}
+
+	public function NombreProfesor($idProfesor){
+    $nombreProfesor="--";
+
+    $nombreProfesor = BD::table('usuarios')->where('Numero_cedula','=',$idProfesor)->value('nombre');
+     
+     
+    return $nombreProfesor;
 	}
 
 	public function insertarRegistro(){

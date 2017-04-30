@@ -89,7 +89,6 @@
              
 
              <input  type="button" name="AsistenciaAtras" value="Atras" class="pAsisAtras" onClick="pAsisAtras()" >
-             <input  type="submit" name="AsistenciaGuardar" value="Guardar" class="pAsisGuardar">
              
             
 			</div>
@@ -97,9 +96,11 @@
 			<div id="generarReporte" class="generarReporte" style="display: none">
 				<h2>Generar Reporte </h2>
 			     	<div align='center' class="panelBlanco">
+                       
+                       <select class= "electRepor" id="selectRepor">
 
-                     <h3>aqui puede ir un combobox con el codigo y el nombre de las asignturaa, el campo para el texto de la dificulta</h3>
-
+                       </select>
+                     
 			    	</div>
                
                <input  type="button" name="ReporteAtras" value="Atras" class="pReporAtras" onClick="pReporAtras()" >
