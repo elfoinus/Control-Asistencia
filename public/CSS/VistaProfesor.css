@@ -1,81 +1,9 @@
 
 
-/*/-------------------- Registrar ASISTENCIA----------------------------------------------*/
-.pAsisAtras,.pAsisGuardar { 
- 
-  text-align: center;
-  border: 1px solid #dedede;
-  border-radius: 3px;
-  color: #555;
-  display: inline-block;
-  font: bold 12px/12px HelveticaNeue, Arial;
-  padding: 8px 11px;
-  text-decoration: none;
-  width: 80px;
-  height: 60px;
-  background: #f5f5f5;
-  border-color: #dedede #d8d8d8 #d3d3d3;
-  box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-  color: #555;
-  text-shadow: 0 1px 0 #fff;
-  background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: -webkit-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: o-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: ms-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: linear-gradient(top,  #f9f9f9, #f0f0f0);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0');
-
-}
 
 
-.pAsisGuardar:hover, .pAsisAtras:hover {
- background: rgba(0,0,0,0);
- color: #3a7999;
- box-shadow: inset 0 0 0 3px #3a7999;
-  background: #f4f4f4;
-    border-color: #c7c7c7 #c3c3c3 #bebebe;
-    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
-    text-shadow: 0 1px 0 #fdfdfd;
-    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -webkit-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -o-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -ms-linear-gradient(top,  #efefef, #f8f8f8);
-    background: linear-gradient(top,  #efefef, #f8f8f8);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8');
-
-}
-* {
-margin:0px;
-padding:0px;
-font-family: "Fuente";
-}
-
-
- .pAsisGuardar .pAsisAtras{
-	text-align: right;
-	font-size:20px;
-    font-weight:bold;
-    background:white;
-    border:0px;
-    width:20px;
-    height:150px;
-    text-decoration:none;
-    border:none;
-}
-
-.pAsisAtras{
-	background-image:url('Images/atras.png')no-repeat ;
-	float: left;
-
-}
-
-.pAsisGuardar{
-	background-image:url('Images/registrarse.png')no-repeat;
-	float: right;
-}
-
-/*/--------------------GENERERAR REPORTE----------------------------------------------*/
-.pReporAtras { 
+/*/--------------------botones----------------------------------------------*/
+.pReporAtras,.pAsisAtras,.pInforAtras,.pCrearInfor, .pMisAsigAtras { 
 	bottom: 100px;
 	font-size:20px;
     font-weight:bold;
@@ -105,7 +33,7 @@ font-family: "Fuente";
 }
 
 
- .pReporAtras:hover {
+ .pReporAtras:hover,.pAsisAtras:hover,.pInforAtras:hover,.pCrearInfor:hover, .pMisAsigAtras:hover{
  background: rgba(0,0,0,0);
  color: #3a7999;
  box-shadow: inset 0 0 0 3px #3a7999;
@@ -122,82 +50,7 @@ font-family: "Fuente";
 
 }
 
-.pReporAtras{
-
-}
-
-.pReporAtras{
-	background-image:url('Images/atras.png')no-repeat ;
-	float: left;
-
-}
-
-/*/--------------------GENERAR INFORME----------------------------------------------*/
- 
-
- .pInforAtras,.pCrearInfor { 
- 
-  text-align: center;
-  border: 1px solid #dedede;
-  border-radius: 3px;
-  color: #555;
-  display: inline-block;
-  font: bold 12px/12px HelveticaNeue, Arial;
-  padding: 8px 11px;
-  text-decoration: none;
-  width: 80px;
-  height: 60px;
-  background: #f5f5f5;
-  border-color: #dedede #d8d8d8 #d3d3d3;
-  box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-  color: #555;
-  text-shadow: 0 1px 0 #fff;
-  background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: -webkit-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: o-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: ms-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: linear-gradient(top,  #f9f9f9, #f0f0f0);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0');
-
-}
-
-
-.pCrearInfor:hover, .pInforAtras:hover {
- background: rgba(0,0,0,0);
- coCrearInfor;
- box-shadow: inset 0 0 0 3px #3a7999;
-  background: #f4f4f4;
-    border-color: #c7c7c7 #c3c3c3 #bebebe;
-    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
-    text-shadow: 0 1px 0 #fdfdfd;
-    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -webkit-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -o-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -ms-linear-gradient(top,  #efefef, #f8f8f8);
-    background: linear-gradient(top,  #efefef, #f8f8f8);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8');
-
-}
-* {
-margin:0px;
-padding:0px;
-font-family: "Fuente";
-}
-
-
- .pCrearInfor .pInforAtras{
-	text-align: right;
-	font-size:20px;
-    font-weight:bold;
-    background:white;
-    border:0px;
-    width:20px;
-    height:150px;
-    text-decoration:none;
-    border:none;
-}
-
-.pInforAtras{
+.pReporAtras,.pAsisAtras,.pInforAtras, .pMisAsigAtras{
 	background-image:url('Images/atras.png')no-repeat ;
 	float: left;
 
@@ -209,67 +62,6 @@ font-family: "Fuente";
 }
 
 
-/*----------------------------------CREANDO INFORME---------------------------------*/
-
-
- .pInforAtras,.pCrearInfor ,.pMisAsigAtras{ 
-  font-size:20px;
-  font-weight:bold;
-  text-align: center;
-  border: 1px solid #dedede;
-  border-radius: 3px;
-  color: #555;
-  display: inline-block;
-  font: bold 12px/12px HelveticaNeue, Arial;
-  padding: 8px 11px;
-  text-decoration: none;
-  width: 80px;
-  height: 60px;
-  background: #f5f5f5;
-  border-color: #dedede #d8d8d8 #d3d3d3;
-  box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
-  color: #555;
-  text-shadow: 0 1px 0 #fff;
-  background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: -webkit-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: o-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: ms-linear-gradient(top,  #f9f9f9, #f0f0f0);
-  background: linear-gradient(top,  #f9f9f9, #f0f0f0);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0');
-
-}
-
-
-.pCrearInfor:hover, .pInforAtras:hover, .pMisAsigAtras::hover {
- background: rgba(0,0,0,0);
- coCrearInfor;
- box-shadow: inset 0 0 0 3px #3a7999;
-  background: #f4f4f4;
-    border-color: #c7c7c7 #c3c3c3 #bebebe;
-    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
-    text-shadow: 0 1px 0 #fdfdfd;
-    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -webkit-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -o-linear-gradient(top,  #efefef, #f8f8f8);
-    background: -ms-linear-gradient(top,  #efefef, #f8f8f8);
-    background: linear-gradient(top,  #efefef, #f8f8f8);
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8');
-
-}
-
-
-
-
-.pInforAtras, .pMisAsigAtras{
-	background-image:url('Images/atras.png')no-repeat ;
-	float: left;
-
-}
-
-.pCrearInfor{
-	background-image:url('Images/registrarse.png')no-repeat;
-	float: right;
-}
 
 .panelBlanco{
   background: white;
