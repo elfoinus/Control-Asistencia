@@ -7,17 +7,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\BD;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 
 use config\sesion;
 
 use App\Usuarios;
 use App\Horarios;
-use App\registro;
+use App\Registros;
 
 use Carbon\Carbon; 
- 
 
 class ProfesorController extends Controller{
 
@@ -25,16 +22,24 @@ class ProfesorController extends Controller{
 
 	
 	public function calcularHorario(){
-		$idHorario;
-		$asig;$nomAsig;
-		$dia;$hInicio;$cHoras;$idProfesor;
-
 		# esta funcion imprime la tabla de los horarios disponibles para el profesor a la vista profesor
 		$usuario = session()->get('id');
+
+		date_default_timezone_set('America/Bogota'); //Asignas la zona horaria de tu país.
+		setlocale(LC_TIME, 'spanish'); //Fijamos el tiempo local
+		
+		$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
+	
+		$dia = strtoupper($dia);
 		# hacer que solo retorne los registros que tengan el dia actual con carbon  http://carbon.nesbot.com/docs/
 
-		$horario = Horarios::where('id_usuario',$usuario)->get();
-       
+		$dt = Carbon::now('America/Bogota');
+		$fecha = $dt->toDateString();
+
+		$dia = "MIERCOLES";   // aqui se cambia el dia para probar 
+		$horario = Horarios::where('dia',$dia)->where('id_usuario',$usuario)->get();
+		
+		
 		 echo " <tr>  
 					      <td width='150' style='font-weight: bold'><h5>IDENTIFICADOR</h5></td>
 					      
@@ -57,28 +62,39 @@ class ProfesorController extends Controller{
                      	
 
 	               for($i = 0; $i < sizeof($horario); $i++ ){
-                     $idHorario=$horario[$i]->id_Horario;
-                     $asig=$horario[$i]->id_asignatura_dependencia;
-                     $dia=$horario[$i]->dia;
-                     $hInicio=$horario[$i]->hora_inicial;
-                     $cHoras= $horario[$i]->cantidad_horas;
-                     $idProfesor = $horario[$i]->id_usuario;
+	           		
+	           		$registro = Registros::where('id_horario',$horario[$i]->id_Horario)->where('fecha',$fecha)->get();
+					
+					if(sizeof($registro) == 0){
+						echo "  
+						    <tr>  
+						      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
+						      <td width='150'><h5>"."<input  type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
 
-                     $nomAsig= ProfesorController::nombreAsignatura($asig);
+						    </tr>   
+						";  
+					}else{	
 
-					echo "  
-					    <tr>  
-					      <td width='150'><h5>".$idHorario."</h5></td> 
-					      <td width='150'><h5>".$nomAsig."</h5></td> 
-					      <td width='150'><h5>".$dia."</h5></td> 
-					      <td width='150'><h5>".$hInicio."</h5></td> 
-					      <td width='150'><h5>".$cHoras."</h5></td> 
-					      <td width='150'><h5>".$idProfesor."</h5></td> 
-					      <td width='150'><h5>"."<input type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
+						echo "  
+						    <tr>  
+						      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
+						      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
+						      <td width='150'><h5>"."<input disabled checked type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
 
-					    </tr>   
-					";  
-						
+						    </tr>   
+						";
+					}
+
+
 	                     	}
 	                     	
 					
@@ -86,11 +102,6 @@ class ProfesorController extends Controller{
 
 	public function misAsignaturas(){
 			# esta funcion imprime la tabla de las asignaturas del profesor a la vista profesor
-        $id_asignatura_depen;
-        $dia;
-        $hInicial;
-        $cHoras;
-        $NombreAsig;
 
 		$usuario = session()->get('id');
 
@@ -115,65 +126,62 @@ class ProfesorController extends Controller{
                      	
 
 	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
-                      $id_asignatura_depen= $asignaturas[$i]->id_asignatura_dependencia;
-                      $dia=$asignaturas[$i]->dia;
-                      $hInicial = $asignaturas[$i]->hora_inicial;
-                      $cHoras=$asignaturas[$i]->cantidad_horas;
-
-                      $NombreAsig = ProfesorController::NombreAsignatura($id_asignatura_depen);
-                      
-					  echo "  
+   
+					echo "  
 					    <tr>  
-					      <td width='150'><h5>".$NombreAsig."</h5></td>  
-					      <td width='150'><h5>".$dia."</h5></td> 
-					      <td width='150'><h5>".$hInicial."</h5></td> 
-					      <td width='150'><h5>".$cHoras."</h5></td> 
-					    </tr>";  
-	                }
+					      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
+					      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
+					      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
+					      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
+					    </tr>   
+					";  
+						
+	                     	}
 	}
 
-	public function NombreAsignatura($idAsig_dependencia){
-    $nombreAsignatura="--";$codigoAsig="--";
-
-    $codigoAsig = BD::table('asignatura_dependencia')->where('id_asignatura_dependencia','=',$idAsig_dependencia)->value('codigo_asignatura');
-    
-    $nombreAsignatura = BD::table('asignaturas')->where('codigo_asignatura','=',$codigoAsig)->value('nombre_asignatura');
+	public function retornarNombreAsignatura($idAsig_dependencia){
+    $nombreAsignatura;
+    $AsignaturaDep = Asignatura_dependencia::where('id_asignatura_dependencia',$idAsig_dependencia)->get();
      
-    return $nombreAsignatura;
-	}
+     for ($i=0; $i < sizeof($AsignaturaDep); $i++) { 
+     	
+     	$nombreAsignatura=$AsignaturaDep[$i]->codigo_asignatura;
+     }
 
-	public function NombreProfesor($idProfesor){
-    $nombreProfesor="--";
-
-    $nombreProfesor = BD::table('usuarios')->where('Numero_cedula','=',$idProfesor)->value('nombre');
-     
-     
-    return $nombreProfesor;
 	}
 
 	public function insertarRegistro(){
 		
-		$n = $_GET['envio'];
+		    $n = $_GET['envio'];
 			$usuario = session()->get('id');
-			# hacer que solo retorne los registros que tengan el dia actual con carbon  http://carbon.nesbot.com/docs/
-
-			$horari = Horarios::where('id_usuario',$usuario)->get();
+			
+			
 	   	 	
-	   	 	
-
-	   	 	$horario = $horari[$n];
+			date_default_timezone_set('America/Bogota'); //Asignas la zona horaria de tu país.
+			setlocale(LC_TIME, 'spanish'); //Fijamos el tiempo local
+			
+			$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
 		
-			$dt = Carbon::now();
+			$dia = strtoupper($dia);
+	   	 	$dia = 'MIERCOLES';  // cambiar el dia para hacer pruebas 
+	   	 	$horario = Horarios::where('id_usuario',$usuario)->where('dia',$dia)->get();
+	   	 		
+		
+			$dt = Carbon::now('America/Bogota');
 			$fecha = $dt->toDateString(); 
 			$hora = $dt->toTimeString();
 			
 
 			/*DB::table('Registros')->insert(
-			[ 'id_horario' => $horario->id_Horario , 'fecha'=> $fecha , 'hora_llegada' => $hora ]
+			[ 'id_horario' => $horario[$n]->id_Horario , 'fecha'=> $fecha , 'hora_llegada' => $hora ]
 			);
-		   */
+		    */
+			Registros::insert([ 'id_horario' => $horario[$n]->id_Horario , 'fecha'=> $fecha , 'hora_llegada' => $hora ]);
 			
-			echo "llego número: ".$n."se ha marcado el registro con  fecha: ".$fecha." y hora: ".$hora;
+
+				
+			#echo "se realizo el registro con "."fecha: ".$fecha." hora: ".$hora." id-horario: ".$horario[$n]->id_Horario;
+			echo "registro realizdo satisfactoriamente :D";
 			# i = numero de registro en horario que se va a guardar
 			# h = consulta de horarios mostrada al usuario
 			#en este metodo se debe insertar en la tabla Registros con la fecha/hora actual
@@ -181,6 +189,8 @@ class ProfesorController extends Controller{
 			#nota: comparar si la hora de llegada esta cerca a la hora de  inicio indicada en h
 		
 	}
+
+	
 
 
 	private function getUsuario(){
