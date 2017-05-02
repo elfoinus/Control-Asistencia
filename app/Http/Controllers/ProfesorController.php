@@ -36,7 +36,7 @@ class ProfesorController extends Controller{
 		$dt = Carbon::now('America/Bogota');
 		$fecha = $dt->toDateString();
 
-		$dia = "MIERCOLES";   // aqui se cambia el dia para probar 
+	//	$dia = "MIERCOLES";   // aqui se cambia el dia para probar 
 		$horario = Horarios::where('dia',$dia)->where('id_usuario',$usuario)->get();
 		
 		
@@ -139,16 +139,28 @@ class ProfesorController extends Controller{
 	                     	}
 	}
 
-	public function retornarNombreAsignatura($idAsig_dependencia){
+	public function NombreAsignatura($idAsig_dependencia){
     $nombreAsignatura;
-    $AsignaturaDep = Asignatura_dependencia::where('id_asignatura_dependencia',$idAsig_dependencia)->get();
+    $codigoAsig = Asignatura_dependencia::where('id_asignatura_dependencia',$idAsig_dependencia)->value('codigo_asignatura');
      
-     for ($i=0; $i < sizeof($AsignaturaDep); $i++) { 
-     	
-     	$nombreAsignatura=$AsignaturaDep[$i]->codigo_asignatura;
-     }
+    $nombreAsignatura = Asignaturas::where('codigo_asignatura',$codigoAsig)->value('nombre_asignatura');
 
+     	
+     return $nombreAsignatura;
+     
 	}
+
+	public function NombreProfesor($idProfesor){
+    $NombreProfesor;
+     
+    $NombreProfesor = Asignaturas::where('Numero_Cedula',$idProfesor)->value('nombreNombreProfesor');
+
+     	
+     return $NombreProfesor;
+     
+	}
+
+
 
 	public function insertarRegistro(){
 		
@@ -163,7 +175,7 @@ class ProfesorController extends Controller{
 			$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
 		
 			$dia = strtoupper($dia);
-	   	 	$dia = 'MIERCOLES';  // cambiar el dia para hacer pruebas 
+	   	 	//$dia = 'MIERCOLES';  // cambiar el dia para hacer pruebas 
 	   	 	$horario = Horarios::where('id_usuario',$usuario)->where('dia',$dia)->get();
 	   	 		
 		
