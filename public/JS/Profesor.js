@@ -1,4 +1,4 @@
-function toggleCheckbox(item){
+  function toggleCheckbox(item){
    var  enviar = item.value;
    //var  csrf_token = "{{ csrf_token() }}"
    //$("#respuesta").load('ProfesorControllerI',{envio :enviar , _token: $_token } );
@@ -69,23 +69,44 @@ function pReporAtras(){
 }
 
 
-/*---------GENERAR INFORME---------------------------*/
+/*---------GENERAR TEMAS---------------------------*/
 
-function generarInforme(){
+function registrarTemas(){
 
-  $("#generarInforme").show();
+  $("#regisTemas1").show();
 
   $("#menu").hide();
 
 
 }
 
-function pInforAtras(){
-  $("#generarInforme").hide();
+function pTemasAtras(){
+  $("#regisTemas1").hide();
 
   $("#menu").show();
 }
 
+function pRegistrandoTemasAtras(){
+
+  $("#regisTemas2").hide();
+
+  $("#regisTemas1").show();
+}
+
+function pRegistrarTemas(){
+  alert("tomar los valor del combobox y registrar temas a esa asignatura");
+
+   $("#regisTemas1").hide();
+
+   $("#regisTemas2").show();
+
+ 
+}
+
+function pRegistrandoTemasGuardar(){
+  alert("El tema esta siendo guardado(insert y limpiar campos)");
+
+}
 /*------------------Mis Asignaturas-------------------------------*/
 
 function misAsignaturas(){

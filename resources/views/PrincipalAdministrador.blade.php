@@ -42,17 +42,12 @@
   	              <ul class="parent-menu">
                     <li><a href="#">Asistencia</a> 
     	              <ul> 
-			    		<li><a href="#">Asistencia Profesores</a></li> 
-			    		<li><a href="#">Asistencia Monitores</a></li> 
+			    		<li><a href="#" onClick="Asisprofesores()">Asistencia Profesores</a></li> 
+			    		<li><a href="#" onClick="AsisMonitores()">Asistencia Monitores</a></li> 
     			  	  </ul> 
                     </li> 
 
-                    <li><a href="#">Generar Reporte</a>
-				   	  <ul> 
-					   <li><a href="#">item</a></li>
-					   <li><a href="#">item</a></li> 
-					  </ul>
-				    </li>
+                    <li><a href="#">Generar Reporte</a></li>
 
 				    <li><a href="#">Cambio de clave</a></li>  
                  </ul>
@@ -75,25 +70,23 @@
 					    </li> 
 
 					<li><a href="#">Informes</a>
-					 <ul> <li><a href="#">item</a></li>
-					  <li><a href="#">item</a></li> 
-					  
-					  <li><a href="#">item</a></li>
-					  <li><a href="#">item</a></li> 
-					</ul>
-					</li>  
+					 <ul> 
+					 	<li><a href="#">item</a></li>
+					    <li><a href="#">item</a></li> 
+				   	 </ul>
+					</li> 
+
 					<li><a href="#">Soporte</a>
-					 <ul> <li><a href="#">item</a></li>
-					  <li><a href="#">item</a></li> 
-					
-					  <li><a href="#">item</a></li>
-					  <li><a href="#">item</a></li> 
-					</ul>
-					</li>  
+					 <ul> 
+					 	<li><a href="#">item</a></li>
+					    <li><a href="#">item</a></li> 
+					 </ul>
+				    </li>  
 				</ul>
               </nav>
 			 </div>
-			 </div>
+			</div>
+			
          <form method="POST">
 			<div id="salir" style="display: none">
 		        <h2>Salir</h2>

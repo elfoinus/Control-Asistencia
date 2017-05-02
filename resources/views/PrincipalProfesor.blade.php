@@ -49,7 +49,7 @@
 
                     <li><a href="#" onclick="generarReporte()">Generar Reporte</a></li> 
 
-                    <li><a href="#" onclick="generarInforme()">Generar Informe</a></li> 
+                    <li><a href="#" onclick="registrarTemas()">Registrar temas</a></li> 
 
 				    <li><a href="#" onclick="misAsignaturas()">Mis Asignaturas</a></li> 
                  </ul>
@@ -57,10 +57,31 @@
 		      </div>		
 		    </div>
 
-			<div id="admin" style="display: none">
-			   <h2>CAMBIO DE CLAVE</h2>
-			    <p>Esta opcion no esta funcional Por favor revisar</p>
-			 </div>
+			
+		    <div id="admin" class="cambiarClave" style="display: none" >
+            	<h2 >Cambio de Clave </h2>
+            	
+            	<form method='POST'>
+				 <div align='center' class="panelBlanco2">  
+
+                     <label class="label">Contraseña Antigua:</label>
+  				     <input type="password" class="password" placeholder="Contraseña Vieja" name="passwordOld" id="PasswordOld" required>
+  				     
+  				     <label class="label">Nueva contraseña:</label>
+  				     <input type="password" class="password" placeholder="Contraseña Nueva" name="passwordNew" id="PasswordNew" required>
+
+				     <label class="label">Confirme Nueva contraseña:</label>
+  				     <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" name="passwordNewC" id="PasswordNewC" required>
+			         
+				  </div>
+             
+             		<input  type="button" name="cambioClaveAtras" value="Cancelar" class="pAsisAtras" onClick="mostrar(1)" >
+                    <input type="submit" name="cambiarContraseña" value="Renovar Clave" class="bcambioClave">
+
+                </form>
+            
+			</div>
+			
 
 			<div id="salir" style="display: none">
 			    <h2>Salir</h2>
@@ -75,7 +96,7 @@
             <div id="registrarHorario" class="registrarHorario" style="display: none" >
             	<h2 >Registro de Horario </h2>
             		
-				 <div align='center'>  
+				 <div align='center' class="panelBlanco">  
 			   
 			   		<table border='1' id = 'contenedor' cellpadding='0' cellspacing='0' width='600' bgcolor='#F6F6F6' bordercolor='#FFFFFF'>  
 					   
@@ -94,46 +115,86 @@
 			</div>
 
 			<div id="generarReporte" class="generarReporte" style="display: none">
-				<h2>Generar Reporte </h2>
-			     	<div align='center' class="panelBlanco">
-                       
-                       <select class= "electRepor" id="selectRepor">
+			   <h2>Generar Reporte </h2>
+			    <div align='center' class="panelBlanco">
 
-                       </select>
+			     	<ul> 
+			     		 <li>
+			     		 	<label class="label">Seleccione la Asignatura:</label>
+			         	    <select  class= "selectRepor" id="selectRepor" requerid>
+                             <option disable>Seleccionar</option>
+			     	        </select>
+			     	     </li>
+			     	</ul>
                      
-			    	</div>
+                      	
+                          <label> Dificulta  {{ Form::radio('tipoReporte','Dificulta') }}</label>   
+                          <label> Reporte simple  {{ Form::radio('tipoReporte','Reporte Simple') }}</label>   
+                          <label> Porovecho   {{ Form::radio('tipoReporte','Provechoso') }}</label>   
+                      
+
+                      <div>
+                       <ul>
+			    		  <li>
+			    		  	<label class="label">Drescripcion: </label><textarea id="DescripcionReporte" class="textarea" value="Descripcion del Reporte" required></textarea>
+                		  </li>
+                		</ul>
+			    	  </div>
+			     </div>
+			    	
                
                <input  type="button" name="ReporteAtras" value="Atras" class="pReporAtras" onClick="pReporAtras()" >
-
-			</div>
+               <input  type="submit" name="GuardarReporte" value="Guardar Reporte" class="GuardarReporte">
+            
+			</div> 
 
            
-            <div id="generarInforme" class="generarInforme" style="display: none" >
-            	<h2 >Crear Informe </h2>
+            <div id="regisTemas1" class="regisTemas" style="display: none" >
+            	<h2 >Registrar temas</h2>
             		
-				 <div align='center'>  
-			   
-				
-				 </div>
-             
+				 <div align='center' class="panelBlanco2" id="panelBlanco1">
+                    
+                   <table class="table">
+			     	 <tr> 
+			     		<td> <label class="label">Seleccione la Asignatura:</label></td>
+			     		<td><select class= "selectRepor" id="selectTemas">
+                            <option disable>Seleccionar</option>
+			     		  </select>
+			     		</td>
+			     	  </tr>
+                    </table>
+                 
+                 </div>
 
-             <input  type="button" name="InformeAtras" value="Atras" class="pInforAtras" onClick="pInforAtras()" >
-             <input  type="submit" name="CrearInforme" value="Crear Informe" class="pCrearInfor">
+               <input  type="button" name="TemasAtras" value="Atras" class="pTemasAtras" onClick="pTemasAtras()" >
+               <input  type="button" name="Temas" value="Registrar Temas" class="Temas"  onClick="pRegistrarTemas()">
              
             
 			</div>
 
-			 <div id="CreandoInforme" class="CreandoInforme" style="display: none" >
-            	<h2 >Crear Informe </h2>
-            		
-				 <div align='center'>  
-			   
-				
-				 </div>
-             
+             <div id="regisTemas2" class="regisTemas" style="display: none" >
+             	<h2 >Registrar temas</h2>
 
-             <input  type="button" name="CreandoInformeAtras" value="Atras" class="pInforAtras" onClick="pCreandoInforAtras()" >
-             <input  type="submit" name="GuardarInforme" value="GuardarInforme" class="pGuardarInfor">
+			  <div  class="panelBlanco2" align='center' >
+                
+               
+               	<ul>
+			      <li>
+			      	<label class="label">Nombre del tema:</label> <input type="text" nema=id="NombreTema" class="input" id="NombreTema" required>
+			      </li>
+			    </ul>
+
+			    <ul>
+			      <li>
+			      	<label class="label">Drescripcion: </label><textarea id="DescripcionTema" class="textarea" value="Descripcion del tema " required></textarea>
+                  </li>
+                </ul>
+               
+			   
+              </div>
+
+             	 <input  type="button" name="RegistrandoTemasAtras" value="Atras" class="pTemasAtras" onClick="pRegistrandoTemasAtras()" >
+             	 <input  type="submit" name="GuardarInforme" value="Agregar Tema"  class="Temas" onClick="pRegistrandoTemasGuardar()">
              
             
 			</div>
@@ -141,12 +202,12 @@
 			 <div id="MisAsignaturas" class="MisAsignaturas" style="display: none" >
             	<h2 >Mis Asignaturas </h2>
             		
-				 <div align='center'>  
+				 <div align='center' class="panelBlanco">  
 			        <table border='1' id = 'contenedorMisAsignaturas' cellpadding='0' cellspacing='0' width='600' bgcolor='#F6F6F6' bordercolor='#FFFFFF'>  
 					   
 					</table> 
 
-					<h5> <label id ="respuesta" > </label> </h5>
+					
 				
 				 </div>
              

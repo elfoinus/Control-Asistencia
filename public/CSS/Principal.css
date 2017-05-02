@@ -180,7 +180,7 @@ transition: left 200ms ease-in;
 .registrarHorario{
   position: center;
   width:1000px;
-  height: 300px;
+  height: 550px;
   padding:40px 30px;
   background:rgba(235,235,205,0.7);
   border-radius:4px;
@@ -194,7 +194,7 @@ transition: left 200ms ease-in;
   font-style: normal;
   float: center;
   padding-top: 15px;
-  font-size: 30px;
+  font-size: 40px;
   color: red;
 }
 
@@ -226,7 +226,7 @@ transition: left 200ms ease-in;
   font-style: normal;
   float: center;
   padding-top: 15px;
-  font-size: 30px;
+  font-size: 40px;
   color: red;
 }
 
@@ -241,12 +241,10 @@ transition: left 200ms ease-in;
 
 
 
-
-
-.generarInforme, .creandoInforme, .MisAsignaturas{
+  .cambiarClave{
   position: center;
-  width:1000px;
-  height: 300px;
+  width:850px;
+  height: 600px;
   padding:40px 30px;
   background:rgba(235,235,205,0.7);
   border-radius:4px;
@@ -255,16 +253,52 @@ transition: left 200ms ease-in;
   margin:50px auto;
 }
 
-.generarInforme, .creandoInforme, .MisAsignaturas h2{
+.cambiarClave h2{
   font-family: "Fuente";
   font-style: normal;
   float: center;
   padding-top: 15px;
-  font-size: 30px;
+  font-size: 40px;
   color: red;
 }
 
-.generarInforme, .creandoInforme, .MisAsignaturas h5{
+.cambiarClave h5{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 13px;
+  color: red;
+
+
+
+}
+
+
+
+
+.regisTemas, .MisAsignaturas{
+  position: center;
+  width:1000px;
+  height: 550px;
+  padding:40px 30px;
+  background:rgba(235,235,205,0.7);
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+.regisTemas, .MisAsignaturas h2{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 40px;
+  color: red;
+}
+
+.regisTemas, .MisAsignaturas h5{
   font-family: "Fuente";
   font-style: normal;
   float: center;
