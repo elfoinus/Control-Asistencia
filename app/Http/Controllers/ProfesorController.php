@@ -1,20 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
-
-use Illuminate\Http\Request;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Http\BD;
-
 use config\sesion;
+use Illuminate\Support\Facades\DB;
 
 use App\Usuarios;
 use App\Horarios;
+use App\Semestre;
 use App\Registros;
 
-use Carbon\Carbon; 
+
+include'TiempoController.php';
 
 class ProfesorController extends Controller{
 
@@ -22,83 +18,79 @@ class ProfesorController extends Controller{
 
 	
 	public function calcularHorario(){
-		# esta funcion imprime la tabla de los horarios disponibles para el profesor a la vista profesor
+		
 		$usuario = session()->get('id');
 
-		date_default_timezone_set('America/Bogota'); //Asignas la zona horaria de tu país.
-		setlocale(LC_TIME, 'spanish'); //Fijamos el tiempo local
+		$tiempo = new Tiempo();
+
+		$dia = $tiempo->get_dia();
 		
-		$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
-	
-		$dia = strtoupper($dia);
-		# hacer que solo retorne los registros que tengan el dia actual con carbon  http://carbon.nesbot.com/docs/
+		$fecha = $tiempo->get_fecha();
 
-		$dt = Carbon::now('America/Bogota');
-		$fecha = $dt->toDateString();
-
-	//	$dia = "MIERCOLES";   // aqui se cambia el dia para probar 
 		$horario = Horarios::where('dia',$dia)->where('id_usuario',$usuario)->get();
 		
 		
 		 echo " <tr>  
-					      <td width='150' style='font-weight: bold'><h5>IDENTIFICADOR</h5></td>
-					      
-					      <td width='150' style='font-weight: bold'><h5>ASIGNATURA</h5></td>
-					     
-					      <td width='150' style='font-weight: bold'><h5>DIA</h5></td>
-					      
-					      <td width='150' style='font-weight: bold'><h5>HORA INICIO</h5></td>
-					      
-					      <td width='150' style='font-weight: bold'><h5>CANTIDAD HORAS</h5></td>
+			      <td width='150' style='font-weight: bold'><h5>IDENTIFICADOR</h5></td>
+			      
+			      <td width='150' style='font-weight: bold'><h5>ASIGNATURA</h5></td>
+			     
+			      <td width='150' style='font-weight: bold'><h5>DIA</h5></td>
+			      
+			      <td width='150' style='font-weight: bold'><h5>HORA INICIO</h5></td>
+			      
+			      <td width='150' style='font-weight: bold'><h5>CANTIDAD HORAS</h5></td>
 
-					      <td width='150' style='font-weight: bold'><h5>ID DOCENTE</h5></td>
+			      <td width='150' style='font-weight: bold'><h5>ID DOCENTE</h5></td>
 
-					      <td width='150' style='font-weight: bold'><h5>ASISTENCIA</h5></td>
+			      <td width='150' style='font-weight: bold'><h5>ASISTENCIA</h5></td>
 
-					    </tr> 
+			    </tr> 
 
-                     <tr  >  
+	       
                     ";
                      	
 
-	               for($i = 0; $i < sizeof($horario); $i++ ){
-	           		
-	           		$registro = Registros::where('id_horario',$horario[$i]->id_Horario)->where('fecha',$fecha)->get();
-					
-					if(sizeof($registro) == 0){
-						echo "  
-						    <tr>  
-						      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
-						      <td width='150'><h5>"."<input  type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
+       	for($i = 0; $i < sizeof($horario); $i++ ){
+       		
+       		$registro = Registros::where('id_horario',$horario[$i]->id_Horario)->where('fecha',$fecha)->get();
+			
+			if(sizeof($registro) == 0){
+				echo "  
+				    <tr>  
+				      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
+				      <td width='150'><h5>"."<input  type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
 
-						    </tr>   
-						";  
-					}else{	
+				    </tr>   
+				";  
 
-						echo "  
-						    <tr>  
-						      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
-						      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
-						      <td width='150'><h5>"."<input disabled checked type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
+			}else{	
 
-						    </tr>   
-						";
-					}
+				echo "  
+				    <tr>  
+				      <td width='150'><h5>".$horario[$i]->id_Horario."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->id_asignatura_dependencia."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->dia."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->hora_inicial."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->cantidad_horas."</h5></td> 
+				      <td width='150'><h5>".$horario[$i]->id_usuario."</h5></td> 
+				      <td width='150'><h5>"."<input disabled checked type='checkbox' onclick= 'toggleCheckbox(this,{$horario})' name='checkboses'  value= '{$i}'  <br>"."</td> 
+
+				    </tr>   
+				";
+			}
 
 
-	                     	}
-	                     	
-					
+        }
+	    		
 	}
+
+
 
 	public function misAsignaturas(){
 			# esta funcion imprime la tabla de las asignaturas del profesor a la vista profesor
@@ -125,18 +117,18 @@ class ProfesorController extends Controller{
                     ";
                      	
 
-	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
-   
-					echo "  
-					    <tr>  
-					      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
-					      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
-					      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
-					      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
-					    </tr>   
-					";  
-						
-	                     	}
+	      for($i = 0; $i < sizeof($asignaturas); $i++ ){
+
+			echo "  
+			    <tr>  
+			      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
+			      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
+			      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
+			      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
+			    </tr>   
+			";  
+				
+	             	}
 	}
 
 	public function NombreAsignatura($idAsig_dependencia){
@@ -168,32 +160,21 @@ class ProfesorController extends Controller{
 			$usuario = session()->get('id');
 			
 			
-	   	 	
-			date_default_timezone_set('America/Bogota'); //Asignas la zona horaria de tu país.
-			setlocale(LC_TIME, 'spanish'); //Fijamos el tiempo local
+	   	 	$tiempo = new Tiempo();
 			
-			$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
-		
-			$dia = strtoupper($dia);
-	   	 	//$dia = 'MIERCOLES';  // cambiar el dia para hacer pruebas 
+			$dia = $tiempo->get_dia();
+
 	   	 	$horario = Horarios::where('id_usuario',$usuario)->where('dia',$dia)->get();
 	   	 		
-		
-			$dt = Carbon::now('America/Bogota');
-			$fecha = $dt->toDateString(); 
-			$hora = $dt->toTimeString();
+			$fecha = $tiempo->get_fecha();
+			$hora = $tiempo->get_hora();	
 			
-
-			/*DB::table('Registros')->insert(
-			[ 'id_horario' => $horario[$n]->id_Horario , 'fecha'=> $fecha , 'hora_llegada' => $hora ]
-			);
-		    */
 			Registros::insert([ 'id_horario' => $horario[$n]->id_Horario , 'fecha'=> $fecha , 'hora_llegada' => $hora ]);
 			
 
 				
 			#echo "se realizo el registro con "."fecha: ".$fecha." hora: ".$hora." id-horario: ".$horario[$n]->id_Horario;
-			echo "registro realizdo satisfactoriamente :D";
+			echo "registro realizo satisfactoriamente :D";
 			# i = numero de registro en horario que se va a guardar
 			# h = consulta de horarios mostrada al usuario
 			#en este metodo se debe insertar en la tabla Registros con la fecha/hora actual
@@ -205,15 +186,6 @@ class ProfesorController extends Controller{
 	
 
 
-	private function getUsuario(){
-
-		return $this->usuario;
-	}
-
-	private function setUsuario($nuevo){
-
-		$this->usuario = $nuevo;
-	}
 
 
 	public function combobox(){
@@ -223,6 +195,58 @@ class ProfesorController extends Controller{
 
 
 
+
+	public function semanaActual(){
+	    
+	    $tiempo = new Tiempo();
+		$fecha = $tiempo->get_fecha();
+
+		#realiza resta entre dia actual y dia de inicio del semestre que esta en la tabla Semestre
+		$dias_diferencia = DB::select('select DATEDIFF( "'.$fecha.'",(select fecha_inicio from Semestre)) as dias');
+		$dias = $dias_diferencia[0]->dias;
+		
+		if($dias < 7){
+			$semanas = 1;
+		}else{
+
+		$semanas = floor($dias / 7);	
+
+		}
+
+		
+		#retorna el número de semana actual partiendo de la fecha en la tabla Semestre
+		return $semanas;
+	}
+
+
+	public function id_horarios_deuda(){
+
+		$usuario = session()->get('id');
+
+		$deuda = array();
+
+		$ids = DB::select('select  id_Horario from Horarios where id_usuario ='.$usuario);
+		#$ids = DB::select('select  id_Horario from Horarios where id_usuario =789');
+
+		for($i = 0; $i < sizeof($ids); $i++ ){
+
+			$id = $ids[$i]->id_Horario;
+			$count = DB::select('select  count(id_horario) as n from Registros where id_horario = '.$id);
+
+			$semana_actual = $this->semanaActual();
+
+			if ($semana_actual != $count[0]->n) {
+				array_push($deuda,$id);
+				
+			} 
+			
+		}
+		
+		#for($i = 0; $i < sizeof($deuda); $i++ ){
+		#echo $deuda[$i].'-';
+		#}
+		return $deuda;  #retorna arreglo con id's horarios que no estan al dia, es decir no bien con la asistencia
+	}
 
 
 }
