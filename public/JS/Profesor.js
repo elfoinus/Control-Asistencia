@@ -29,18 +29,32 @@
 }
 
 
+
+function llenarSelectReporte(){
+
+$.ajax({
+
+      url: 'ProfesorControllerS',
+      type: 'POST',
+      
+      data: { condicion: "ejecutarFuncion"},
+      success:function(resultado){
+       // imprime "resultado Funcion"
+       alert(resultado);
+      }
+})
+}
+
 /*---------REGISTRO ASISTENCIA---------------------------*/
 
 function registroDeAsistencia(){
-
-  $("#contenedor").load('ProfesorControllerC');
-
   $("#registrarHorario").show();
 
-  $("#menu").hide();
-
-
+  $("#contenedor").load('ProfesorControllerC');
+ 
+  $("#menu").hide();  
 }
+
 
 function pAsisAtras(){
   $("#registrarHorario").hide();
@@ -48,12 +62,17 @@ function pAsisAtras(){
   $("#menu").show();
 }
 
+/**-----------------------------------------*/
+
 
 function generarReporte(){
 
   $("#generarReporte").show();
 
   $("#menu").hide();
+
+$('selectRepor').load('cargarAsignaturas');
+
 
 
 }
@@ -66,6 +85,10 @@ function pReporAtras(){
   $("#generarReporte").hide();
 
   $("#menu").show();
+}
+
+function guardarReporte(){
+  alert("guardar datos");
 }
 
 
@@ -126,4 +149,9 @@ function pMisAsigAtras(){
   $("#MisAsignaturas").hide();
 
   $("#menu").show();
+}
+
+function cambiarClave(){
+
+  alert('hacer el insert y mostrar que se cambio correctamente la contraseña');
 }

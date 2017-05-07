@@ -6,7 +6,6 @@
 	   
          <link rel="stylesheet" href=" {{ URL::to('CSS/Principal.css') }} "/>
          <link rel="stylesheet" href=" {{ URL::to('CSS/VistaProfesor.css') }} "/>
-         <LINK REL=StyleSheet HREF="CSS/VistaProfesor.css" TYPE="text/css" MEDIA=screen>
 
     	  <script type="text/javascript" src="JS/Jquery.js"></script>
 		  <script type="text/javascript" src="JS/Principal.js"></script>
@@ -64,19 +63,25 @@
             	<form method='POST'>
 				 <div align='center' class="panelBlanco2">  
 
+		            <div>
                      <label class="label">Contraseña Antigua:</label>
   				     <input type="password" class="password" placeholder="Contraseña Vieja" name="passwordOld" id="PasswordOld" required>
-  				     
+  				    </div>
+
+					<div>
   				     <label class="label">Nueva contraseña:</label>
   				     <input type="password" class="password" placeholder="Contraseña Nueva" name="passwordNew" id="PasswordNew" required>
+                    </div>
 
+                    <div>
 				     <label class="label">Confirme Nueva contraseña:</label>
   				     <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" name="passwordNewC" id="PasswordNewC" required>
-			         
-				  </div>
+			        </div>		  
+
+			    </div>
              
              		<input  type="button" name="cambioClaveAtras" value="Cancelar" class="pAsisAtras" onClick="mostrar(1)" >
-                    <input type="submit" name="cambiarContraseña" value="Renovar Clave" class="bcambioClave">
+                    <input type="submit" name="cambiarContraseña" value="Renovar Clave" class="bcambioClave" onClick="cambiarClave()">
 
                 </form>
             
@@ -85,10 +90,10 @@
 
 			<div id="salir" style="display: none">
 			    <h2>Salir</h2>
-			    <p>Esta opcion no esta funcional Por favor revisar</p>
 			</div>
 
 		</section>
+
 		
 		<section class="opcionesMuestra">
       
@@ -98,13 +103,11 @@
             		
 				 <div align='center' class="panelBlanco">  
 			   
-			   		<table border='1' id = 'contenedor' cellpadding='0' cellspacing='0' width='600' bgcolor='#F6F6F6' bordercolor='#FFFFFF'>  
+			   		<table border='1' id='contenedor' cellpadding='0' cellspacing='0' width='600' bgcolor='#F6F6F6' bordercolor='#FFFFFF'>  
 					   
 					</table> 
 
 					<h5> <label id ="respuesta" > </label> </h5>
-				
-				
 				
 				 </div>
              
@@ -116,35 +119,41 @@
 
 			<div id="generarReporte" class="generarReporte" style="display: none">
 			   <h2>Generar Reporte </h2>
-			    <div align='center' class="panelBlanco">
+			    <div align='center' class="panelBlanco2">
 
-			     	<ul> 
-			     		 <li>
-			     		 	<label class="label">Seleccione la Asignatura:</label>
-			         	    <select  class= "selectRepor" id="selectRepor" requerid>
-                             <option disable>Seleccionar</option>
-			     	        </select>
-			     	     </li>
-			     	</ul>
+			     	<div>
+			     	  <label class="label">Seleccione la Asignatura:</label>
+			          <select  name= "selectRepor" id="selectRepor" requerid>
+                        <option disable>Seleccionar</option>
+			     	  </select>
+			     	 
+			     	</div>
+
+			     	   
+                    <div align='left'> <label> Dificulta  {{ Form::radio('tipoReporte','Dificulta') }}</label> </div>
+
+                    <div align='left'> <label> Reporte simple  {{ Form::radio('tipoReporte','Reporte Simple') }}</label> </div>
+                        
+                    <div align='left'> <label> Porovechoso   {{ Form::radio('tipoReporte','Provechoso') }}</label> </div>
                      
-                      	
-                          <label> Dificulta  {{ Form::radio('tipoReporte','Dificulta') }}</label>   
-                          <label> Reporte simple  {{ Form::radio('tipoReporte','Reporte Simple') }}</label>   
-                          <label> Porovecho   {{ Form::radio('tipoReporte','Provechoso') }}</label>   
-                      
+                    <div>
+                    	<label class="label">Numero de estudiantes:</label>
+                        
+                         {!! Form::number('nEstudiantes', 'Numero de Estudiantes',['class' => 'input']) !!}
 
-                      <div>
-                       <ul>
-			    		  <li>
-			    		  	<label class="label">Drescripcion: </label><textarea id="DescripcionReporte" class="textarea" value="Descripcion del Reporte" required></textarea>
-                		  </li>
-                		</ul>
-			    	  </div>
+                    </div>
+
+                    <div>
+                      <label class="label">Drescripcion: </label>
+                      <textarea id="DescripcionReporte" class="textarea" value="Descripcion del Reporte" required></textarea>
+                	
+			    	</div>
+
 			     </div>
 			    	
                
                <input  type="button" name="ReporteAtras" value="Atras" class="pReporAtras" onClick="pReporAtras()" >
-               <input  type="submit" name="GuardarReporte" value="Guardar Reporte" class="GuardarReporte">
+               <input  type="submit" name="GuardarReporte" value="Guardar Reporte" class="GuardarReporte" onclick="guardarReporte()">
             
 			</div> 
 
@@ -154,16 +163,15 @@
             		
 				 <div align='center' class="panelBlanco2" id="panelBlanco1">
                     
-                   <table class="table">
-			     	 <tr> 
-			     		<td> <label class="label">Seleccione la Asignatura:</label></td>
-			     		<td><select class= "selectRepor" id="selectTemas">
+                   <div>
+                   		
+                   		<label class="label">Seleccione la Asignatura:</label></td>
+			     		<select class= "selectRepor" id="selectTemas">
                             <option disable>Seleccionar</option>
-			     		  </select>
-			     		</td>
-			     	  </tr>
-                    </table>
-                 
+			     		</select>
+			     	</div>
+
+			     		                 
                  </div>
 
                <input  type="button" name="TemasAtras" value="Atras" class="pTemasAtras" onClick="pTemasAtras()" >
@@ -180,7 +188,8 @@
                
                	<ul>
 			      <li>
-			      	<label class="label">Nombre del tema:</label> <input type="text" nema=id="NombreTema" class="input" id="NombreTema" required>
+			      	<label class="label">Nombre del tema:</label>
+			      	 <input type="text" nema=id="NombreTema" class="input" id="NombreTema" required>
 			      </li>
 			    </ul>
 
@@ -216,7 +225,9 @@
              
             
 			</div>
-		</section>
+		</sectio
+
+	}n>
 
 	</body>
 </html>

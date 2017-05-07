@@ -65,7 +65,7 @@
 
 
 .panelBlanco {
-  overflow: scroll;
+ 
   background: white;
   position: center;
   width:900px;
@@ -91,7 +91,7 @@
   background: white;
   position: center;
   width:620px;
-  height: 250px;
+  height: 285px;
   padding:40px 30px;
   border-radius:4px;
   -moz-border-radius:4px;
@@ -107,104 +107,4 @@
   padding-top: 15px;
   font-size: 15px;
   color: black;
-}
-.selectRepor {
-  text-align: right;
-  position: relative;
-  border: 2px solid #ccc;
-  width: 150px;
-  font-size: 18px;
-  overflow: hidden;
-  background-color: #fff;
-}
-  .selectRepor:before {
-    content:'';
-    position: absolute;
-    right: 5px;
-    top: 7px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 7px 5px 0 5px;
-    border-color: #000000 transparent transparent transparent;
-    z-index: 5;
-    pointer-events: none;
-  }
-  
-  .selectRepor select {
-    padding: 5px 8px;
-    width: 130%;
-    border: 5px;
-    box-shadow: none;
-    background-color: transparent;
-    background-image: none;
-    appearance: none;
-  }
-
-  .label{
-    font-size: 30px;
-    color: black;
-    font-style: normal;
-    text-align: left;
-    position: center;
-    font: bold 12px/12px HelveticaNeue, Arial;
-
-
-  }
-
-
- li{
-    color: black;
-    font-size: 15px;
- }
-  .table{
-     border-collapse: separate;
-  border-spacing:  50px;
-  }
-
-  .temasdiv{
-    border: 1px solid #CED5D7;
-    border-radius: 6px;
-    padding: 45px 45px 20px;
-    margin-top: 50px;
-    background-color: white;
-    box-shadow: 0px 5px 10px #B5C1C5, 0 0 0 10px #EEF5F7 inset;
-}
-
-  .textarea{
-    color:black;
-    width: 200px;
-    height: 150px;
-    font: bold 12px/12px HelveticaNeue, Arial;
-    border:none;
-    padding:5px 7px 5px 15px;
-    background:#fff;
-    color:#666;
-    border:2px solid #6E6E6E;
-   border-radius:4px;
-  -moz-border-radius:4px;
-  -webkit-border-radius:4px;
-  }
-
-  label{
-    color: black;
-  }
-
-  .input, .password{ 
-  font: bold 12px/12px HelveticaNeue, Arial;
-  width:200px;
-  height:20px;
-  border:none;
-  padding:5px 7px 5px 15px;
-  background:#fff;
-  color:#666;
-  border:2px solid #6E6E6E;
-  border-radius:4px;
-  -moz-border-radius:4px;
-  -webkit-border-radius:4px;
-}
-
-.input:focus,.password, .input:focusinput{
-  border-color:#424242;
-  color:#FE2E2E;
 }

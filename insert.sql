@@ -1,5 +1,4 @@
 
-
 INSERT INTO Perfiles values (0,"ADMINISTRADORXS");
 INSERT INTO Perfiles values (1,"COORDINADORXS");
 INSERT INTO Perfiles values (2,"PROFESORXS");
@@ -26,3 +25,4 @@ INSERT INTO Asignatura_dependencia values("EFGH","0002",2);
 
 INSERT INTO Horarios values (1,1,"JUEVES",TIME('8:00'),4,"789");
 INSERT INTO Horarios values (2,2,"JUEVES",TIME('14:00'),3,"789");
+INSERT INTO Horarios values (2,2,"MIERCOLES",TIME('14:00'),3,"789");

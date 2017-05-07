@@ -16,6 +16,7 @@ class Registros extends Model
 		'id_Registros',
 		'id_horario',
 		'fecha',
+		'fecha',
 		'hora_llegada',
 			
 

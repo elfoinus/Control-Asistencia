@@ -22,6 +22,8 @@ class ProfesorController extends Controller{
 
 	
 	public function calcularHorario(){
+
+
 		# esta funcion imprime la tabla de los horarios disponibles para el profesor a la vista profesor
 		$usuario = session()->get('id');
 
@@ -37,8 +39,10 @@ class ProfesorController extends Controller{
 		$fecha = $dt->toDateString();
 
 	//	$dia = "MIERCOLES";   // aqui se cambia el dia para probar 
-		$horario = Horarios::where('dia',$dia)->where('id_usuario',$usuario)->get();
+			
+		//$horario = Horarios::where('dia',$dia)->where('id_usuario',$usuario)->get();
 		
+
 		
 		 echo " <tr>  
 					      <td width='150' style='font-weight: bold'><h5>IDENTIFICADOR</h5></td>
@@ -61,7 +65,7 @@ class ProfesorController extends Controller{
                     ";
                      	
 
-	               for($i = 0; $i < sizeof($horario); $i++ ){
+	              /* for($i = 0; $i < sizeof($horario); $i++ ){
 	           		
 	           		$registro = Registros::where('id_horario',$horario[$i]->id_Horario)->where('fecha',$fecha)->get();
 					
@@ -94,10 +98,9 @@ class ProfesorController extends Controller{
 						";
 					}
 
-
-	                     	}
-	                     	
-					
+               }
+	                    	
+					*/
 	}
 
 	public function misAsignaturas(){
@@ -138,6 +141,8 @@ class ProfesorController extends Controller{
 						
 	                     	}
 	}
+
+	
 
 	public function NombreAsignatura($idAsig_dependencia){
     $nombreAsignatura;
@@ -222,7 +227,23 @@ class ProfesorController extends Controller{
 	} 
 
 
+	public function asignaturas(){
+
+		//$asignaturas = Asignaturas::lists('nombre_asignatura','codigo');
+          
+          	$asignaturas = Horarios::where('id_usuario',$usuario)->get();
 
 
+             echo '<option value="0">[SELECCIONE]</option>';
+
+	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
+
+	              	 echo '<option value="'.$asignaturas[$i]->id_asignatura_dependencia.'">'.$asignaturas[$i]->id_asignatura_dependencia.'</option>';
+
+  
+						
+	                     	}
+
+	}
 
 }
