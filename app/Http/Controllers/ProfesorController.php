@@ -117,19 +117,20 @@ class ProfesorController extends Controller{
                     ";
                      	
 
-	      for($i = 0; $i < sizeof($asignaturas); $i++ ){
-
-			echo "  
-			    <tr>  
-			      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
-			      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
-			      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
-			      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
-			    </tr>   
-			";  
-				
-	             	}
+	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
+   
+					echo "  
+					    <tr>  
+					      <td width='150'><h5>".$asignaturas[$i]->id_asignatura_dependencia."</h5></td>  
+					      <td width='150'><h5>".$asignaturas[$i]->dia."</h5></td> 
+					      <td width='150'><h5>".$asignaturas[$i]->hora_inicial."</h5></td> 
+					      <td width='150'><h5>".$asignaturas[$i]->cantidad_horas."</h5></td> 
+					    </tr>   
+					";  
+						
+	                     	}
 	}
+
 
 	public function NombreAsignatura($idAsig_dependencia){
     $nombreAsignatura;
@@ -244,6 +245,28 @@ class ProfesorController extends Controller{
 		#echo $deuda[$i].'-';
 		#}
 		return $deuda;  #retorna arreglo con id's horarios que no estan al dia, es decir no bien con la asistencia
+	}
+
+
+
+	
+	public function asignaturas(){
+
+		//$asignaturas = Asignaturas::lists('nombre_asignatura','codigo');
+          
+          	$asignaturas = Horarios::where('id_usuario',$usuario)->get();
+
+
+             echo '<option value="0">[SELECCIONE]</option>';
+
+	              for($i = 0; $i < sizeof($asignaturas); $i++ ){
+
+	              	 echo '<option value="'.$asignaturas[$i]->id_asignatura_dependencia.'">'.$asignaturas[$i]->id_asignatura_dependencia.'</option>';
+
+  
+						
+	                     	}
+
 	}
 
 	
