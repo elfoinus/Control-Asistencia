@@ -1,9 +1,9 @@
-  function toggleCheckbox(item){
+
+
+
+/*---------REGISTRO ASISTENCIA---------------------------*/
+function toggleCheckbox(item){
    var  enviar = item.value;
-   //var  csrf_token = "{{ csrf_token() }}"
-   //$("#respuesta").load('ProfesorControllerI',{envio :enviar , _token: $_token } );
-  // var data = { enviar , $_token };
-  
 
    $.ajax({
                 data: {
@@ -18,22 +18,19 @@
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
                         $("#respuesta").html(response);
+                        item.disabled = true;
                 }
         });
-   
-  
 
-   
-   
-    // _token: $_token
 }
 
 
-/*---------REGISTRO ASISTENCIA---------------------------*/
+/*---------MOSTRAR PANEL REGISTRO ASISTENCIA---------------------------*/
 
 function registroDeAsistencia(){
 
   $("#contenedor").load('ProfesorControllerC');
+  $("#semana").load('ProfesorControllerS');
 
   $("#registrarHorario").show();
 
@@ -59,7 +56,7 @@ function generarReporte(){
 }
 
 
-/*---------GENERAR REPORTES---------------------------*/
+/*---------MOSTRAR PANEL GENERAR REPORTES---------------------------*/
 
 
 function pReporAtras(){
@@ -107,7 +104,7 @@ function pRegistrandoTemasGuardar(){
   alert("El tema esta siendo guardado(insert y limpiar campos)");
 
 }
-/*------------------Mis Asignaturas-------------------------------*/
+/*------------------MOSTRAR PANEL Mis Asignaturas-------------------------------*/
 
 function misAsignaturas(){
 

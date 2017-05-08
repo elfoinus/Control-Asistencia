@@ -199,23 +199,21 @@ class ProfesorController extends Controller{
 	public function semanaActual(){
 	    
 	    $tiempo = new Tiempo();
-		$fecha = $tiempo->get_fecha();
+		$fecha = $tiempo->get_fecha(); //fecha actual
 
 		#realiza resta entre dia actual y dia de inicio del semestre que esta en la tabla Semestre
 		$dias_diferencia = DB::select('select DATEDIFF( "'.$fecha.'",(select fecha_inicio from Semestre)) as dias');
 		$dias = $dias_diferencia[0]->dias;
 		
-		if($dias < 7){
-			$semanas = 1;
-		}else{
+		
 
-		$semanas = floor($dias / 7);	
+		$semanas = 1+floor($dias / 7);	
 
-		}
+		
 
 		
 		#retorna el número de semana actual partiendo de la fecha en la tabla Semestre
-		return $semanas;
+		echo "SEMANA # ".$semanas;
 	}
 
 
@@ -247,6 +245,8 @@ class ProfesorController extends Controller{
 		#}
 		return $deuda;  #retorna arreglo con id's horarios que no estan al dia, es decir no bien con la asistencia
 	}
+
+	
 
 
 }

@@ -26,5 +26,9 @@ Route::any('/ProfesorControllerI','ProfesorController@insertarRegistro');
 Route::any('/ProfesorControllerM','ProfesorController@misAsignaturas');
 
 
+Route::any('/ProfesorControllerS','ProfesorController@semanaActual');
+
+Route::any('/ProfesorControllerD','ProfesorController@id_horarios_deuda');
+
 
 

@@ -22,11 +22,11 @@ class Tiempo {
 		setlocale(LC_TIME, 'spanish'); //Fijamos el tiempo local
 		
 		$dia=strftime("%A"); // Guardamos el Nombre del día de la semana.
-		#$dia = 'miercoles' // dia en español
+		$dia = 'lunes'; // dia en español y en mayuscula
 		$this->dia = strtoupper($dia); // lo vuelve mayuscula
 
 		$dt = Carbon::now('America/Bogota');
-		#$dt = Carbon::create(2017, 2, 10, 13); #año - mes - dia - hora formato militar
+		$dt = Carbon::create(2017, 5, 8, 13); #año - mes - dia - hora formato militar
 
 		$this->fecha = $dt->toDateString();
 		$this->hora = $dt->toTimeString();
