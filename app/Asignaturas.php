@@ -15,7 +15,6 @@ class Asignaturas extends Model
 
 		'codigo',
 		'nombre_asignatura',
-		'creditos',
 		'horas_semanales',
 		'jornada',
 		

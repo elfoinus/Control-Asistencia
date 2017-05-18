@@ -1,0 +1,108 @@
+/*/--------------------botones----------------------------------------------*/
+
+ .Atras, .registrar{ 
+	bottom: 100px;
+	font-size:20px;
+    font-weight:bold;
+    border:0px;
+    width:80px;
+    height:30px;
+    text-decoration:none;
+  text-align: center;
+  border: 1px solid #dedede;
+  border-radius: 3px;
+  color: #555;
+  display: inline-block;
+  font: bold 12px/12px HelveticaNeue, Arial;
+  padding: 8px 11px;
+  background: #f5f5f5;
+  border-color: #dedede #d8d8d8 #d3d3d3;
+  box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;
+  color: #555;
+  text-shadow: 0 1px 0 #fff;
+  background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: -webkit-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: o-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: ms-linear-gradient(top,  #f9f9f9, #f0f0f0);
+  background: linear-gradient(top,  #f9f9f9, #f0f0f0);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#f0f0f0');
+
+}
+
+
+ .Atras:hover, .registrar:hover{
+ background: rgba(0,0,0,0);
+ color: #3a7999;
+ box-shadow: inset 0 0 0 3px #3a7999;
+  background: #f4f4f4;
+    border-color: #c7c7c7 #c3c3c3 #bebebe;
+    box-shadow: 0 1px 1px #ebebeb, inset 0 1px 0 #f3f3f3;
+    text-shadow: 0 1px 0 #fdfdfd;
+    background: -moz-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -webkit-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -o-linear-gradient(top,  #efefef, #f8f8f8);
+    background: -ms-linear-gradient(top,  #efefef, #f8f8f8);
+    background: linear-gradient(top,  #efefef, #f8f8f8);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#f8f8f8');
+
+}
+
+.Atras{
+	background-image:url('Images/atras.png')no-repeat ;
+	float: left;
+
+}
+
+.bcambioClave, .registrar{
+	background-image:url('Images/registrarse.png')no-repeat;
+	float: right;
+  width: 120px;
+}
+
+
+
+.panelBlanco {
+
+  overflow: scroll;
+  background: white;
+  position: center;
+  width:900px;
+  height: 300px;
+  padding:40px 30px;
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+
+ .panelBlanco h3{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 15px;
+  color: black;
+}
+
+ .panelBlanco2{
+  background: white;
+  position: center;
+  width:620px;
+  height: 250px;
+  padding:40px 30px;
+  border-radius:4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  margin:50px auto;
+}
+
+
+.panelBlanco2 h3{
+  font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 15px;
+  color: black;
+}

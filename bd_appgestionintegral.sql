@@ -31,7 +31,7 @@ CREATE TABLE `Asignatura_dependencia` (
   KEY `codigo_dependencia_idx` (`codigo_dependencia`),
   CONSTRAINT `codigo_asignatura` FOREIGN KEY (`codigo_asignatura`) REFERENCES `Asignaturas` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `codigo_dependencia` FOREIGN KEY (`codigo_dependencia`) REFERENCES `Dependencias` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `Asignatura_dependencia` (
 
 LOCK TABLES `Asignatura_dependencia` WRITE;
 /*!40000 ALTER TABLE `Asignatura_dependencia` DISABLE KEYS */;
-INSERT INTO `Asignatura_dependencia` VALUES ('ABCD','0001',1),('EFGH','0002',2),('IJKL','0003',3),('MNÑO','0004',4),('PQRS','0005',5),('UVWX','0006',6);
+INSERT INTO `Asignatura_dependencia` VALUES ('ABCD','0001',1),('EFGH','0002',2);
 /*!40000 ALTER TABLE `Asignatura_dependencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `Asignaturas` (
 
 LOCK TABLES `Asignaturas` WRITE;
 /*!40000 ALTER TABLE `Asignaturas` DISABLE KEYS */;
-INSERT INTO `Asignaturas` VALUES ('ABCD','ASIGNATURA-PRUEBA1',4,4,'D'),('EFGH','ASIGNATURA-PRUEBA2',3,3,'N'),('IJKL','ASIGNATURA-PRUEBA3',3,4,'D'),('MNÑO','ASIGNATURA-PRUEBA4',5,4,'D'),('PQRS','ASIGNATURA-PRUEBA5',2,2,'D'),('UVWX','ASIGNATURA-PRUEBA6',3,3,'D');
+INSERT INTO `Asignaturas` VALUES ('ABCD','ASIGNATURA-PRUEBA1',4,4,'D'),('EFGH','ASIGNATURA-PRUEBA2',3,3,'N');
 /*!40000 ALTER TABLE `Asignaturas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,8 +94,37 @@ CREATE TABLE `Dependencias` (
 
 LOCK TABLES `Dependencias` WRITE;
 /*!40000 ALTER TABLE `Dependencias` DISABLE KEYS */;
-INSERT INTO `Dependencias` VALUES ('0001','DEPENDENCIA 1','4567'),('0002','DEPENDENCIA 2','4567'),('0003','DEPENDENCIA 3','4567'),('0004','DEPENDENCIA 4','45678'),('0005','DEPENDENCIA 5','45678'),('0006','DEPENDENCIA 6','45678');
+INSERT INTO `Dependencias` VALUES ('0001','DEPENDENCIA 1','4567'),('0002','DEPENDENCIA 2','4567');
 /*!40000 ALTER TABLE `Dependencias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `Reportes`
+--
+
+DROP TABLE IF EXISTS `Reportes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Reportes` (
+  `id_reporte` varchar(5) NOT NULL AUTO_INCREMENT,
+  `id_usuario` varchar(25) NOT NULL,
+  `asunto` varchar(25) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_reporte`),
+  KEY `id_usuario_idx` (`id_usuario`),
+  CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `Usuarios` (`Numero_cedula`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT  AUTO_INCREMENT=3 CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Dependencias`
+--
+
+LOCK TABLES `Reportes` WRITE;
+/*!40000 ALTER TABLE `Reportes` DISABLE KEYS */;
+INSERT INTO `Reportes` VALUES ('0001','789','reporte de clases','ud debe presentar mensualmente el reporte de las clases');
+/*!40000 ALTER TABLE `Reportes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -117,7 +146,7 @@ CREATE TABLE `Horarios` (
   KEY `id_usuario_idx` (`id_usuario`),
   CONSTRAINT `id_asignatura_dependencia` FOREIGN KEY (`id_asignatura_dependencia`) REFERENCES `Asignatura_dependencia` (`id_asignatura_dependencia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `Usuarios` (`Numero_cedula`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +155,7 @@ CREATE TABLE `Horarios` (
 
 LOCK TABLES `Horarios` WRITE;
 /*!40000 ALTER TABLE `Horarios` DISABLE KEYS */;
-INSERT INTO `Horarios` VALUES (1,1,'JUEVES','08:00:00',4,'789'),(2,2,'JUEVES','14:00:00',3,'789'),(3,3,'LUNES','08:00:00',2,'789'),(4,4,'MIERCOLES','09:00:00',2,'789'),(5,5,'VIERNES','08:00:00',2,'789'),(6,6,'SABADO','14:00:00',3,'789'),(7,3,'MARTES','16:00:00',2,'789'),(8,3,'LUNES','14:00:00',2,'7891'),(9,4,'MIERCOLES','15:00:00',2,'789');
+INSERT INTO `Horarios` VALUES (1,1,'JUEVES','08:00:00',4,'789'),(2,2,'JUEVES','14:00:00',3,'789');
 /*!40000 ALTER TABLE `Horarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +194,7 @@ CREATE TABLE `Registros` (
   `id_Registros` int(11) NOT NULL AUTO_INCREMENT,
   `id_horario` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `hora_llegada` time NOT NULL,
+  `hora_llegada` double NOT NULL,
   PRIMARY KEY (`id_Registros`),
   KEY `id_horario_idx` (`id_horario`),
   CONSTRAINT `id_horario` FOREIGN KEY (`id_horario`) REFERENCES `Horarios` (`id_Horario`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -179,29 +208,6 @@ CREATE TABLE `Registros` (
 LOCK TABLES `Registros` WRITE;
 /*!40000 ALTER TABLE `Registros` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Registros` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Semestre`
---
-
-DROP TABLE IF EXISTS `Semestre`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Semestre` (
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Semestre`
---
-
-LOCK TABLES `Semestre` WRITE;
-/*!40000 ALTER TABLE `Semestre` DISABLE KEYS */;
-INSERT INTO `Semestre` VALUES ('2017-02-06','2017-06-09');
-/*!40000 ALTER TABLE `Semestre` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -230,7 +236,7 @@ CREATE TABLE `Usuarios` (
 
 LOCK TABLES `Usuarios` WRITE;
 /*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
-INSERT INTO `Usuarios` VALUES ('1234','1234','ROOT','root@correounivale.edu.co','0',0),('4567','4567','COORDINADOR','coordinador@correounivale.edu.co','0',1),('45678','45678','COORDINADORA','coordinadora@correounivale.edu.co','0',1),('789','789','DOCENTE-PRUEBA','docente-prueba@correounivale.edu.co','0',2),('7891','7891','DOCENTE-PRUEBA1','docente-prueba1@correounivale.edu.co','0',2);
+INSERT INTO `Usuarios` VALUES ('1234','1234','ROOT','root@correounivale.edu.co','0',0),('4567','4567','COORDINADOR','coordinador@correounivale.edu.co','0',1),('789','789','DOCENTE-PRUEBA','docente-prueba@correounivale.edu.co','0',2);
 /*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +252,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +261,89 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2017_04_21_143359_create_sessions_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL,
+  UNIQUE KEY `sessions_id_unique` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -267,4 +355,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-07 20:56:12
+-- Dump completed on 2017-04-27 16:17:51

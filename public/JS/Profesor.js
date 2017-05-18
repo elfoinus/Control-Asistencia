@@ -18,6 +18,7 @@ function toggleCheckbox(item){
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
                         $("#respuesta").html(response);
+                        alert("Usuario creado"); 
                         item.disabled = true;
                 }
         });
