@@ -9,6 +9,7 @@ use App\Dependencias;
 use App\Asignaturas;
 use App\Asignatura_dependencia;
 use App\Horarios;
+use App\Reportes;
 
 use Carbon\Carbon;
 use Excel;
@@ -245,7 +246,6 @@ class AdministradorController extends Controller
 
 		public function ListarAsignaturas(){
 
-		//$asigDepen=Asignaturas_dependencia::all();
 
 		$asig=Asignaturas::all();
 
@@ -255,7 +255,7 @@ class AdministradorController extends Controller
 
           for($i = 0; $i < sizeof($asig); $i++ ){
 
-	          $array.=  '<option value="'.$asig[$i]->codigo.'">'.$asig[$i]->codigo.'--'.$asig[$i]->nombre_asignatura.'</option>';
+	          $array.=  '<option value="'.AdministradorController::getIdAsigDep($asig[$i]->codigo).'">'.$asig[$i]->codigo.'--'.$asig[$i]->nombre_asignatura.'</option>';
   
 	      }
 
@@ -293,6 +293,18 @@ class AdministradorController extends Controller
 	}
 
 
+
+	public function getIdAsigDep($codigoAsig){
+
+    $idAsigDep='';
+     
+    $idAsigDep = Asignatura_dependencia::where('codigo_asignatura',$codigoAsig)->value('id_asignatura_dependencia');
+
+     	
+     return $idAsigDep;
+     
+	}
+
 	public function getTipoUsuario($idUsuario){
 
     $TipoUsuario='';
@@ -321,39 +333,38 @@ class AdministradorController extends Controller
 
 	public function generarReporte(){
    
-
         $id_usuario = $_GET['id_usuario'];
 		$asunto = $_GET['asunto'];
 		$descripcion = $_GET['descripcion'];
 
-		Usuarios::insert([ 'id_usuario' => $id_usuario ,'asunto' => $descripcion , 'password'=> $descripcion ]);
+		Reportes::insert([ 'id_usuario' => $id_usuario ,'asunto' => $descripcion , 'descripcion'=> $descripcion ]);
 
 
-		return "reporte registrado";
+		return "Reporte registrado";
    }
      
-
-  
-
-///falta temirnar la tabla para reportes
 
 
   public function cambiarClave(){
  	$mensaje='';		
 
  	$usuario = session()->get('id');
- 	$passwordOldC  = session()->get('password');
 
+
+ 	$passwordOldC  = $this->getPasswordUsuario($usuario);
+     
  	$passwordOld = $_GET['passwordOld'];
  	$passwordNew = $_GET['passwordNew'];
  	$passwordNewC= $_GET['passwordNewC'];
+
+
 
  	
  	if ($passwordOld == $passwordOldC) {
 
           if ($passwordNew==$passwordNewC) {
 
-          	Usuarios::where('Numero_cedula',$usuario)->update(['password' => $passwordNewC]);
+            	Usuarios::where('Numero_cedula',$usuario)->update(['password' => $passwordNewC]);
 
           	 $mensaje ='Su contraseña se ha modificado Satisfactoriamente!!';
       
@@ -367,7 +378,6 @@ class AdministradorController extends Controller
         $mensaje ='Tu contraseña antigua es incorrecta!!';
        }
 
-
  		return $mensaje;
 
   }
@@ -378,18 +388,19 @@ class AdministradorController extends Controller
 
     	$mensaje='';
 
-        $idAsig_dependencia = $_GET['asig_Dependencia'];
+        $asig_Dependencia = $_GET['asig_Dependencia'];
 		$dia = $_GET['dia'];
-		$hora_inicial = $_GET['horaInicial'];
-		$cantidad_horas = $_GET['cantidadHoras'];
-		$id_usuario = $_GET['SelectId_usuarioCH'];
+		$horaInicial = $_GET['horaInicial'];
+		$cantidadHoras =$_GET['cantidadHoras'];
+		$id_usuarioH = $_GET['id_usuarioH'];
 
-		$validar=Horarios::where('dia',$dia)->where('dia',$idAsig_dependencia)->where('dia',$hora_inicial)->where('dia',$id_usuario)->where('dia',$dia)->get();
+		$validar=Horarios::where('id_asignatura_dependencia',$asig_Dependencia)->where('hora_inicial',$horaInicial)->where('id_usuario',$id_usuarioH)->where('dia',$dia)->get();
  			
- 			if ($validar==null) {
+ 			if (sizeof($validar)==0) {
 		 
-		      Usuarios::insert([ 'id_asignatura_dependencia' => $idAsig_dependencia , 'dia'=> $dia , 'hora_inicial' => $hora_inicial, 'cantidad_horas' => $cantidad_horas, 'id_usuario' => $id_usuario]);
- 			$mensaje = 'El horario se ha creado Satisfactoriamente!!';
+		      Horarios::insert(['id_asignatura_dependencia' => $asig_Dependencia , 'dia'=> $dia , 'hora_inicial' => $horaInicial, 'cantidad_horas' => $cantidadHoras, 'id_usuario' => $id_usuarioH]);
+ 			
+ 			  $mensaje = 'El horario se ha creado Satisfactoriamente!!';
 
  			}else{
               $mensaje = 'Ya existe un horario con estas especificaciones';
@@ -397,6 +408,7 @@ class AdministradorController extends Controller
 
 		return $mensaje;
 	}
+
 
 	public function CambiarClaveUsuarios(){
   
@@ -414,7 +426,7 @@ class AdministradorController extends Controller
           	Usuarios::where('Numero_cedula',$id_usuario)->update(['password' => $passwordNewC]);
           	
 
-          	 $mensaje ='Su contraseña se ha modificado Satisfactoriamente!!';
+          	 $mensaje ='La contraseña se ha modificado Satisfactoriamente!!';
       
           }else{
           
