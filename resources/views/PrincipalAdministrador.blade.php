@@ -154,8 +154,11 @@
 
        <div class="generarReporte" id="generarReporte" style="display: none">
 				<h2>Generar Reporte</h2>
-            <div class="panelBlanco" > 
 
+              <form  method='get' action="{{ URL::asset('proceso/registrarReporte') }}"> 
+
+                 <div class="panelBlanco" >
+                  
                  <div>
                     <label class="label">Seleccione el Usuario:</label>
                     <select id='selectReport' name='selectReport'></select>
@@ -177,43 +180,43 @@
 
                 </div>
 
+               <input  type="button" name="generarRepGuardar" value="Generar Reporte" class="registrar" onClick="generarReporteGuardar()" >
+               </form>
                <input  type="button" name="generarReporteAtras" value="Atras" class="Atras" onClick="generarReporteAtras()" >
-
-               <input  type="submit" name="generarRepGuardar" value="Generar Reporte" class="registrar" onClick="generarReporteGuardar()" >
-
-			 </div>
+         
+       </div>
 
         <div name="cambiarClave" id="cambiarClave" class="transparente" style="display: none" >
           
           <h2>Cambiar de Clave</h2>
-           <form method='get'>
+            
 
             <div align='center' class="panelBlanco2">  
 
                 <div>
                   <label class="label">Contraseña Antigua:</label>
-                  <input type="password" class="password" placeholder="Contraseña Vieja" name="passwordOld" id="PasswordOld" required>
+                  <input type="password" class="password" placeholder="Contraseña Vieja"  id="PasswordOldq" required>
                 </div>
 
                <div>
                 <label class="label">Nueva contraseña:</label>
-                <input type="password" class="password" placeholder="Contraseña Nueva" name="passwordNew" id="PasswordNew" required>
+                <input type="password" class="password" placeholder="Contraseña Nueva"  id="PasswordNewq" required>
                </div>
 
               <div>
                <label class="label">Confirme Nueva contraseña:</label>
-               <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" name="passwordNewC" id="PasswordNewC" required>
+               <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" id="PasswordNewCq" required>
               </div> 
 
               <div>
-                <label class="label" name='mensajeClave' id='mensajeClave'></label>
+                <label class="label" name='mensajeClave' id='mensajeClave' >configuracion de clave</label>
               </div>     
 
             </div>
+            
+                <input type="button" name="cambiarContraseña" value="Renovar Clave" class="registrar" onClick="guardarCambioClave()">
              
                 <input  type="button" name="cambioClaveAtras" value="Cancelar" class="Atras" onClick="cambioClaveAtras()" >
-                <input type="button" name="cambiarContraseña" value="Renovar Clave" class="registrar" onClick="guardarCambioClave()">
-            </form>
 
        </div>
 
@@ -253,25 +256,23 @@
 			 </div>
  
        <div name="crearProgramacion" id="crearProgramacion" class="transparente" style="display: none">
+
                <h2>Crear un Horario</h2>
+                
+               {{csrf_field()}}
                 <div class="panelBlanco">
                  
                    <div >
-                      {!! Form::label('null', 'Id Horario') !!}
-                      {!! Form::text('id_Horario',null, ['class' => 'input', 'required' => 'required' ]) !!}
-                   </div>
-
-                   <div >
                       {!! Form::label('null', 'Id asignatura y dependencia') !!}
 
-                       <select name='SelectId_asignaturaDepeCH' id='SelectId_asignaturaDepe'></select>
+                       <select  id='SelectId_asignaturaDepeCH'></select>
                    
                    </div>
 
                     <div class="">
                       {!! Form::label('null', 'Dia') !!}
 
-                       <select name='dia' id='dia'>
+                       <select id='dia'>
                         <option disable>Seleccione</option>
                         <option value='LUNES'>LUNES</option>
                         <option value='MARTES'>MARTES</option>
@@ -287,27 +288,27 @@
 
                     <div class="">
                       {!! Form::label('null', 'Hora Inicial') !!}
-                      <input type="date" name="horaInicial" value="hora Inicial:" class="input" id="horaInicial" required>
+                      <input type="time"  class="input" id="horaInicial" required>
                    </div>
 
                    <div class="">
                       {!! Form::label('null', 'Cantida de Horas') !!}
-                      {!! Form::text('cantidadHoras',null, ['class' => 'input', 'required' => 'required' ]) !!}
+
+                      <input type="number"  class="input" id="cantidadHoras" required>
                    </div>
 
                    <div class="">
                       {!! Form::label('null', 'Id del Usuario') !!}
 
-                      <select name='SelectId_usuarioCH' id='SelectId_usuario'></select>
+                      <select id='SelectId_usuarioCH'></select>
                        
                    </div>
-                     {!! Form::label('mesajeCH') !!}
-                   <div>
-                     
-                   </div>
+                      <label class="label" id='mensajeCH' name='mensajeCH'>Usted va a crear un Horario</label>
+                   
                   </div>
 
-                 <input  type="submit" name="crearHorario" value="Crear Horario" class="registrar" onClick="crearHorario()">
+                 <button class="registrar" onClick="crearHorario()">Crear Horario</button>
+                 
 
                  <input  type="button" id="crearProgramacionAtras" name="crearProgramacionAtras" value="Atras" class="Atras" onClick="crearProgramacionAtras()">
        </div>
@@ -315,7 +316,7 @@
 
 			 <div name='crearUsuario' id="crearUsuario"  class="transparente" style="display: none">
   				<h2> Crear Usuario</h2>
-              <form method="get"  >
+              
                 
                  <div class="panelBlanco" >
                  	
@@ -348,7 +349,7 @@
                       {!! Form::label('null', 'Id del perfil') !!}
 
                       <div > 
-                       <select id="id_perfil" name="id_perfil" >
+                       <select id="id_perfil" >
                        	 <option disable>Seleccione</option>
                          <option value='0'>Administrador</option>
                          <option value='1'>Coordinador</option>
@@ -361,26 +362,30 @@
     	           <div class="">
                       {!! Form::label('null', 'Estado') !!}
 
-                      <input id="estado" type='text' placeholder='estado' class='input' required>
+                       <select id="estado" >
+                         <option disable>Seleccione</option>
+                         <option value='0'>Desativado</option>
+                         <option value='1'>Activado</option>
+                         
+                       </select>
 
                  </div>     
-                    
-                      {!! Form::label('mensaje1', 'Usted va a crear un usuario') !!}
-              </div>
+                    <label class="label" id='mensaje1' name='mensaje1'>Usted va a crear un usuario</label>
 
+              
+              </div>
                  <button class="registrar" onClick="registrarUsuario()">registrar usuario  </button>
 
                  <input  type="button" id="crearUsuarioAtras" name="crearUsuarioAtras" value="Atras" class="Atras" onClick="crearUsuarioAtras()">
-		           </form>
+
         </div>
 
 
         <div name="cambiarClaveUsuario" id="cambiarClaveUsuario" class="transparente" style="display: none" >
 
            <h2>Cambiar de Clave a Usuarios</h2>
-             <form method='GET'>
+            
 
-        
             <div align='center' class="panelBlanco2">  
 
                 <div>
@@ -392,24 +397,25 @@
 
              <div>
                <label class="label">Nueva contraseña:</label>
-               <input type="password" class="password" placeholder="Contraseña Nueva" name="passwordNewCUsus" id="PasswordNewCUsus" required>
+               <input type="password" class="password" placeholder="Contraseña Nueva"  id="passwordNewCUsus" required>
              </div>
 
              <div>
                <label class="label">Confirme Nueva contraseña:</label>
-               <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" name="passwordNewCCUsus" id="PasswordNewCCUsus" required>
+               <input type="password" class="password" placeholder="Confirmar Contraseñan Nueva" id="passwordNewCCUsus" required>
              </div>     
 
              <div>
-                <label class="label" name='mensajeCUsus'></label>
+                <label class="label" id='mensajeCUsus'></label>
              </div> 
 
            </div>
-             
-              <input  type="button" name="cambiarClaveUsarioAtras" value="Cancelar" class="Atras" onClick="cambiarClaveUsuarioAtras()" >
                     
               <input type="button" name="cambiarClaveUsuarioGuardar" value="Renovar Clave" class="registrar" onClick="cambiarClaveUsuarioGuardar()">
-            </form>
+           
+
+              <input  type="button" name="cambiarClaveUsarioAtras" value="Cancelar" class="Atras" onClick="cambiarClaveUsuarioAtras()" >
+
         </div>        
 
 

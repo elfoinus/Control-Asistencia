@@ -28,10 +28,11 @@ Route::any('/ProfesorControllerI','ProfesorController@insertarRegistro');
 
 Route::any('/ProfesorControllerM','ProfesorController@misAsignaturas');
 
-Route::any('/registrarUsuario', 'AdministradorController@registrarUsuario');
+Route::any('proceso/registrarUsuario', 'AdministradorController@registrarUsuario');
 
-Route::any('/ProfesorControllerS','ProfesorController@semanaActual');
-Route::any('/ProfesorControllerD','ProfesorController@id_horarios_deuda');
+Route::any('/ProfesorControllerS','ProfesorController@semanaActual'); 
+Route::any('/ProfesorControllerD','ProfesorController@tablasDeuda');
+Route::any('/ProfesorControllerDe','ProfesorController@id_horarios_deuda');
 Route::any('/cargarAsignaturas','ProfesorController@asignaturas');
 
 Route::any('/listarUsuarios','AdministradorController@ListarUsuarios');
@@ -42,13 +43,29 @@ Route::any('/listarProfesoresHoysinAsistir','AdministradorController@ListarProfe
 Route::any('/listarMonitoresHoy','AdministradorController@ListarMonitoresHoy');
 Route::any('/listarMonitoresHoySinAsistir','AdministradorController@ListarMonitoresHoySinAsistencia');
 
-Route::any('/cambiarClaveAdmin','AdministradorController@cambiarClave');
+Route::any('proceso1/cambiarClaveAdmin','AdministradorController@cambiarClave');
 
 Route::any('/getPasswordUsuario','AdministradorController@getPasswordUsuario');
-Route::any('/crearHorario','AdministradorController@crearHorario');
+Route::any('proceso/crearHorario','AdministradorController@crearHorario');
 
 
-Route::any('/cambiarClaveUsuarios','AdministradorController@CambiarClaveUsuarios');
+Route::any('proceso/cambiarClaveUsuarios','AdministradorController@CambiarClaveUsuarios');
+Route::get('proceso/generarReporte','AdministradorController@generarReporte');
+Route::get('proceso/registrarReporte','ProfesorController@registrarReporte');
+
+Route::any('/listarAsigParaReporte','ProfesorController@listarAsigParaReporte');
+Route::any('proceso/crearTema','ProfesorController@crearTema');
+
+Route::any('/listarAsignaturasUsuario','ProfesorController@ListarAsignaturasUsuario');
+
+Route::any('proceso/cambiarClaveProfesor','ProfesorController@cambiarClave');
+
+
+
+
+
+
+
 
 
 

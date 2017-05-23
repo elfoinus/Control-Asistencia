@@ -18,7 +18,7 @@ class Horarios extends Model
 		'dia',
 		'hora_inicial',
 		'cantidad_horas',
-		'id_usuario',
+		'id_usuario'
 		
 		];
 }

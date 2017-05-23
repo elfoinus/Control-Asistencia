@@ -182,10 +182,10 @@ transition: left 200ms ease-in;
     }
 
 
-.registrarHorario,.asisProfes,.AsisMonitores ,.transparente{
+.transparenteIni,.asisProfes,.AsisMonitores ,.transparente{
   position: center;
   width:1000px;
-  height: 550px;
+  height: 590px;
   padding:40px 30px;
   background:rgba(235,235,205,0.7);
   border-radius:4px;
@@ -194,7 +194,7 @@ transition: left 200ms ease-in;
   margin:50px auto;
 }
 
-.registrarHorario h2,.asisProfes h2,.AsisMonitores h2, .transparente h2{
+.transparenteIni h2,.asisProfes h2,.AsisMonitores h2, .transparente h2{
   font-family: "Fuente";
   font-style: normal;
   float: center;
@@ -203,12 +203,25 @@ transition: left 200ms ease-in;
   color: red;
 }
 
-.registrarHorario h5, .asisProfes h5,.AsisMonitores h5, .transparente h5{
+.transparenteIni h5, .asisProfes h5,.AsisMonitores h5, .transparente h5{
   font-family: "Fuente";
   font-style: normal;
   float: center;
   padding-top: 15px;
   font-size: 13px;
+  color: red;
+}
+.transparenteIni{
+  width:1500px;
+  height: 250px;
+}
+
+h6{
+    font-family: "Fuente";
+  font-style: normal;
+  float: center;
+  padding-top: 15px;
+  font-size: 20px;
   color: red;
 }
 

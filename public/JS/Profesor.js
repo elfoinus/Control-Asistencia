@@ -18,7 +18,7 @@ function toggleCheckbox(item){
                 },
                 success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
                         $("#respuesta").html(response);
-                        alert("Usuario creado"); 
+                      
                         item.disabled = true;
                 }
         });
@@ -50,9 +50,55 @@ function pAsisAtras(){
 function generarReporte(){
 
   $("#generarReporte").show();
+  $("#selectReporProfesor").load('listarAsigParaReporte');
 
   $("#menu").hide();
 
+
+}
+
+function clasesPorRecuperar(){
+
+  $('#clasesPorRecuperar').show();
+  $('#tablaRecuperar').load('ProfesorControllerD');
+  $("#menu").hide();
+
+}
+
+function recuperarAtras(){
+$('#menu').show();
+
+$('#clasesPorRecuperar').hide();
+
+}
+
+
+
+function guardarReporte(){
+
+  $.ajax({
+
+   data: {
+      id_registro: document.getElementById("selectReporProfesor").value,
+      tipo: document.getElementById("selectTipoReporProfesor").value,
+      nEstudiantes: document.getElementById("nEstudiantes").value,
+      descripcionRP: document.getElementById("descripcionRP").value
+    },
+    
+    url: 'proceso/registrarReporte',
+    
+    type: 'get', 
+                
+    beforeSend: function () {
+        $("#mensajeRP").html("Generando Reporte, Espere por favor...");
+      },
+      
+    success:  function (response) {
+
+       $("#mensajeRP").html(response);      
+    }
+    
+  });
 
 }
 
@@ -75,6 +121,8 @@ function registrarTemas(){
 
   $("#menu").hide();
 
+  $("#selectAsigTemas").load('listarAsignaturasUsuario');
+
 
 }
 
@@ -92,7 +140,6 @@ function pRegistrandoTemasAtras(){
 }
 
 function pRegistrarTemas(){
-  alert("tomar los valor del combobox y registrar temas a esa asignatura");
 
    $("#regisTemas1").hide();
 
@@ -102,7 +149,32 @@ function pRegistrarTemas(){
 }
 
 function pRegistrandoTemasGuardar(){
-  alert("El tema esta siendo guardado(insert y limpiar campos)");
+ 
+
+  $.ajax({
+
+   data: {
+      codigoAsig: document.getElementById("selectAsigTemas").value,
+      NombreTema: document.getElementById("NombreTema").value,
+      DescripcionTema: document.getElementById("DescripcionTema").value
+    },
+    
+    url: 'proceso/crearTema',
+    
+    type: 'get', 
+                
+    beforeSend: function () {
+        $("#mensajeTema").html("Generando Tema, Espere por favor...");
+      },
+      
+    success:  function (response) {
+
+       $("#mensajeTema").html(response);      
+    }
+    
+  });
+
+
 
 }
 /*------------------MOSTRAR PANEL Mis Asignaturas-------------------------------*/
@@ -124,4 +196,30 @@ function pMisAsigAtras(){
   $("#MisAsignaturas").hide();
 
   $("#menu").show();
+}
+
+function cambiarClavep(){
+
+  $.ajax({
+
+   data: {
+      PasswordOldp: document.getElementById("PasswordOldp").value,
+      PasswordNewp: document.getElementById("PasswordNewp").value,
+      PasswordNewCp: document.getElementById("PasswordNewCp").value
+    },
+    
+    url: 'proceso/cambiarClaveProfesor',
+    
+    type: 'get', 
+                
+    beforeSend: function () {
+        $("#mensajeClave").html("Cambiando Clave, Espere por favor...");
+      },
+      
+    success:  function (response) {
+
+       $("#mensajeClave").html(response);      
+    }
+    
+  });
 }

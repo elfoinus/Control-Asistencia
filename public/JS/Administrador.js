@@ -14,11 +14,11 @@ function registrarUsuario(){
       password: gpassword,//document.getElementById("password").value,
       nombre: gnombre,///document.getElementById("nombre").value,
       correo: gcorreo,///document.getElementById("correo").value,
-      estado: gestado;
+      estado: gestado,
       id_perfil: gid_perfil///document.getElementById("id_perfil").value               
     },
     
-    url: 'registrarUsuario',
+    url: 'proceso/registrarUsuario',
     
     type: 'get', 
                 
@@ -90,8 +90,7 @@ $('#selectReport').load('listarUsuarios');
 
 
 function generarReporteAtras(){
-
-
+        
  $('#generarReporte').hide();
 
   $('#menu').show();
@@ -100,7 +99,6 @@ function generarReporteAtras(){
 
 function generarReporteGuardar(){
 
-    alert('Guardar datos y limpiar');
 
   $.ajax({
 
@@ -110,7 +108,7 @@ function generarReporteGuardar(){
       descripcion: document.getElementById("descripcionReport").value
     },
     
-    url: 'generarReporte',
+    url: 'proceso/generarReporte',
     
     type: 'get', 
                 
@@ -120,7 +118,7 @@ function generarReporteGuardar(){
       
     success:  function (response) {
 
-       $("#mensajeReport").html("Reporte creado Sactifatoriamente!!");      
+       $("#mensajeReport").html(response);      
     }
     
   });
@@ -176,16 +174,21 @@ function guardar(){
 }
 
 function guardarCambioClave(){
+   
+var Vieja=document.getElementById("PasswordOldq").value;
+ var Nueva=document.getElementById("PasswordNewq").value;
+ var NuevaC=document.getElementById("PasswordNewCq").value;
+
 
 $.ajax({
 
    data: {
-      passwordOld: document.getElementById("passwordOld").value,
-      passwordNew: document.getElementById("passwordNew").value,
-      passwordNewC: document.getElementById("passwordNewC").value
+      passwordOld: Vieja, //document.getElementById("passwordOld").value,
+      passwordNew: Nueva,//document.getElementById("passwordNew").value,
+      passwordNewC: NuevaC//document.getElementById("passwordNewC").value
     },
     
-    url: 'cambiarClaveAdmin',
+    url: 'proceso1/cambiarClaveAdmin',
     
     type: 'get', 
                 
@@ -225,16 +228,15 @@ function crearProgramacion(){
   $("#menu1").hide();
   $("#crearProgramacion").show();
 
-  $('#SelectId_asignaturaDepe').load('listarAsignaturas');
+  $('#SelectId_asignaturaDepeCH').load('listarAsignaturas');
 
-  $('#SelectId_usuario').load('listarUsuarios');
+  $('#SelectId_usuarioCH').load('listarUsuarios');
 
 
 }
 
 function crearHorario(){
 
-  alert('Guardar datos y limpiar');
 
   $.ajax({
 
@@ -242,12 +244,12 @@ function crearHorario(){
       asig_Dependencia: document.getElementById("SelectId_asignaturaDepeCH").value,
       horaInicial: document.getElementById("horaInicial").value,
       cantidadHoras: document.getElementById("cantidadHoras").value,
-      id_usuario: document.getElementById("SelectId_usuarioCH").value,
-      dia: document.getElementById("dia").value,
+      id_usuarioH: document.getElementById("SelectId_usuarioCH").value,
+      dia: document.getElementById("dia").value
 
     },
     
-    url: 'crearHorario',
+    url: 'proceso/crearHorario',
     
     type: 'get', 
                 
@@ -258,8 +260,8 @@ function crearHorario(){
       
     success:  function (response) {
 
-       $("#mensajeCH").load('crearHorario'); 
-
+      $("#mensajeCH").html(response); 
+     
     }
     
   });
@@ -298,18 +300,18 @@ function cambiarClaveUsuarioGuardar(){
      
     },
     
-    url: 'cambiarClaveUsuarios',
+    url: 'proceso/cambiarClaveUsuarios',
     
     type: 'get', 
                 
     beforeSend: function () {
 
-        $("#mensajeCUsus").html("Creando Horario, Espere por favor...");
+        $("#mensajeCUsus").html("Cambiando clave, Espere por favor...");
       },
       
     success:  function (response) {
 
-       $("#mensajeCUsus").load('crearHorario'); 
+       $("#mensajeCUsus").html(response); 
     }
     
   });

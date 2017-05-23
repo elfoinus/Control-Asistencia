@@ -50,11 +50,22 @@ class LoginController extends Controller{
 
 			case 0:
 
+				$cedula = $usuario->Numero_cedula;
+				$nombre = $usuario->nombre;
+
+				session(['id' => $cedula]);
+				session(['nombre' => $nombre]);
+
 				return view('PrincipalAdministrador',compact('usuario')) ->with('mensaje', 'Administrador - ' . $usuario->nombre);
 
 				break;
 
 			case 1:
+				$cedula = $usuario->Numero_cedula;
+				$nombre = $usuario->nombre;
+
+				session(['id' => $cedula]);
+				session(['nombre' => $nombre]);
 			
 				return view('PrincipalCoordinador',compact('usuario'))->with('mensaje', 'Coordinador - ' . $usuario->nombre);
 			
@@ -65,17 +76,21 @@ class LoginController extends Controller{
 				$cedula = $usuario->Numero_cedula;
 				$nombre = $usuario->nombre;
 
-				$password = $usuario->password;
-
 				session(['id' => $cedula]);
 				session(['nombre' => $nombre]);
-				session(['password' => $password]);
 		
 				return view('PrincipalProfesor');
 
 				break;
 
 			case 3:
+
+	            $cedula = $usuario->Numero_cedula;
+				$nombre = $usuario->nombre;
+
+				session(['id' => $cedula]);
+				session(['nombre' => $nombre]);	
+					
 				return view('PrincipalMonitores');
 			break;	
 			
